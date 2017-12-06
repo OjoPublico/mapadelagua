@@ -16,9 +16,9 @@ let topogramAgua = function (options) {
     self.stat = d3.select("#status");
 
     self.filter_dh = {
-        'Alta': false,
-        'Media': false,
-        'Baja': false
+        'Alta': true,
+        'Media': true,
+        'Baja': true
     };
 
     self.custom_color = {
@@ -125,11 +125,15 @@ let topogramAgua = function (options) {
                                         return self.custom_color['default'];
                                     });
 
-                                // setTimeout(function () {
-                                //     self.renderCuencas('nro_licencias');
-                                // }, 1500);
-                            }, 2000);
-                        }, 2500);
+                                $(".dh-check").addClass("selected");
+
+                                setTimeout(function () {
+                                    $(".switch-box").toggleClass('off');
+                                    let key = $(this).hasClass('off') ? 'area' : 'resoluciones';
+                                    self.renderCuencas(key);
+                                }, 500);
+                            }, 1500);
+                        }, 1500);
                     });
                 });
             });
@@ -269,12 +273,6 @@ let topogramAgua = function (options) {
     self.updateForm = function () {
         self.updateDepartamentosSelect();
         self.updateEmpresasSelect();
-        $(".dh-check").click(function () {
-            let name = $(this).data('name');
-            $(this).toggleClass('selected');
-            self.filter_dh[name] = !self.filter_dh[name];
-            self.renderCuencas('nro_licencias');
-        });
 
         $("#close-info").click(function () {
             $(".modal").hide();
@@ -293,6 +291,12 @@ let topogramAgua = function (options) {
             $(".tabs li").removeClass('selected');
             $(this).addClass('selected');
         });
+
+        $(".switch-box").click(function () {
+            $(".switch-box").toggleClass('off');
+            let key = $(this).hasClass('off') ? 'area' : 'resoluciones';
+            self.renderCuencas(key);
+        });
     };
 
     self.updateDepartamentosSelect = function () {
@@ -309,6 +313,7 @@ let topogramAgua = function (options) {
         $("#select-departamento").change(function () {
             let val = this.value;
             self.departamento_selected = val;
+            self.empresa_selected = 'todos';
             self.updateEmpresasSelect();
             self.updateResults();
         });
@@ -578,7 +583,8 @@ let topogramAgua = function (options) {
         self.body.classed("updating", true);
 
         let value = function (d) {
-            if (key == 'area' || (self.filter_dh['Alta'] == false && self.filter_dh['Media'] == false && self.filter_dh['Baja'] == false)) {
+            if (key == 'area') {
+                // if (key == 'area' || (self.filter_dh['Alta'] == false && self.filter_dh['Media'] == false && self.filter_dh['Baja'] == false)) {
                 return d.properties.Shape_Area;
             } else {
                 if (self.data.cuencas[d.properties.CODIGO] === undefined ||

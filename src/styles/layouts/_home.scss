@@ -145,7 +145,8 @@ body.modal-active {
             color: #fff;
             font-size: 18px;
             font-weight: 700;
-            cursor: pointer;
+            // cursor: pointer;
+            transition: all 0.75s ease 0s;
 
             &.alta {
                 color: #ffeda0;
@@ -176,10 +177,60 @@ body.modal-active {
             }
         }
         .label {
-            text-align: center;
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 700;
             margin-bottom: 10px;
+        }
+        .switch {
+            &-box {
+                margin: 0 auto;
+                display: flex;
+                width: 120px;
+                border: solid 1px #fff;
+                border-radius: 5px;
+                overflow: hidden;
+                padding: 2px;
+                position: relative;
+                .item {
+                    text-align: center;
+                    width: 50%;
+                    padding: 5px 0;
+                    color: #fff;
+                    cursor: pointer;
+                    transition: all 0.25s ease 0s;
+        
+                    &.item1 {
+                        color: #111;
+                    }
+                    &.item2 {
+                        color: #fff;
+                    }
+                }
+                .bg {
+                    position: absolute;
+                    width: calc(50% - 4px);
+                    top: 2px;
+                    left: 2px;
+                    bottom: 2px;
+                    background-color: #fff;
+                    border-radius: 3px;
+                    z-index: -1;
+                    transition: all 0.25s ease 0s;
+                }
+                &.off {
+                    .item {
+                        &.item1 {
+                            color: #fff;
+                        }
+                        &.item2 {
+                            color: #111;
+                        }
+                    }
+                    .bg {
+                        left: calc(50% + 2px);
+                    }
+                }
+            }
         }
     }
 
