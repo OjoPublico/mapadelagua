@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="https://ojo-publico.com/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="stylesheet" href="vendor/chosen.css">
+    <link rel="stylesheet" href="dist/styles/screen.min.css">
+</head>
+
+<body>
+    <header class="main-header main-header-fixed">
+        <a class="logo-op" href="https://ojo-publico.com/" target="_blank">
+            <img alt="OjoPúblico" src="dist/images/logo-op.png">
+        </a>
+        <nav class="navbar">
+        </nav>
+    </header>
+    <div class="landing">
+        <div class="bg" id="bg0"></div>
+        <div class="bg" id="bg1"></div>
+        <div class="bg" id="bg2"></div>
+        <div class="cover">
+            <div class="content">
+                <h1>Minería y conflictos al borde de la sequía</h1>
+                <!-- <p>Un mapa para conocer la concentración de la minería en zonas donde el agua es escasa.</p> -->
+                <div class="landing-text" id="landing-text"></div>
+                <button class="btn-go">Explorar</button>
+            </div>
+        </div>
+    </div>
+    <div class="viz-container">
+        <div class="aside">
+            <h1 class="title">Minería sin agua</h1>
+            <div class="abstract">
+                Conoce las cuencas donde la minería tiene licencia para extraer y usar agua en todo el Perú, cuáles operan en zonas con riesgo de sequía y qué conflictos sociales se desencadenaron a su paso.
+            </div>
+            <div class="filter">
+                <div class="label">Volumen de agua disponible:</div>
+                <div class="dh-check alta" id="check-alta" data-name="Alta">Alto</div>
+                <div class="dh-check media" id="check-media" data-name="Media">Medio</div>
+                <div class="dh-check baja" id="check-bajaA" data-name="Baja">Bajo</div>
+            </div>
+        </div>
+        <div class="map-container">
+            <div class="tooltip" id="map-tooltip">
+                <div class="nombre"></div>
+            </div>
+            <svg id="map"></svg>
+        </div>
+        <div class="results">
+            <div class="label">BUSCAR</div>
+            <div class="filters">
+                <div class="filter">
+                    <div class="label">Por departamento:</div>
+                    <select class="chosen-select" id="select-departamento">
+                        <option value="todos" selected>Todos</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <div class="label">Por empresa:</div>
+                    <select class="chosen-select" id="select-empresa">
+                        <option value="todos" selected>Todos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="label" id="results-label">Cuencas:</div>
+            <div class="list" id="results"></div>
+        </div>
+        <div class="modal">
+            <div class="cuenca-info" id="cuenca-info">
+                <button class="btn-close" id="close-info">Cerrar</button>
+                <div class="info-wrapper">
+                    <div class="nombre"></div>
+                    <div class="cuenca-map">
+                        <svg id="cuenca-map"></svg>
+                    </div>
+                    <div class="row">
+                        <div class="stat stat-3">
+                            <div class="label">Volumen de agua disponible:</div>
+                            <div class="value disponibilidad-hidrica"></div>
+                        </div>
+                        <div class="stat stat-3">
+                            <div class="label">Autoridad Local del Agua (ALA):</div>
+                            <div class="value ala"></div>
+                        </div>
+                        <div class="stat stat-3">
+                            <div class="label">Se ubica entre los departamentos de:</div>
+                            <div class="value departamento"></div>
+                        </div>
+                    </div>
+                    <ul class="tabs">
+                        <li class="selected" id="tab1">
+                            <img src="dist/images/drop.png" /> Datos generales</li>
+                        <li id="tab2">
+                            <img src="dist/images/wagon.png" /> Empresas</li>
+                    </ul>
+                    <div class="blocks">
+                        <div class="block selected" id="block1">
+                            <div class="total-resolucion"></div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="row">
+                                        <div class="stat stat-1">
+                                            <div class="label">Por tipo de resolución:</div>
+                                            <div class="value tipo-resolucion"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="stat stat-1">
+                                            <div class="label">Por tipo de uso:</div>
+                                            <div class="value tipo-uso"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row">
+                                        <div class="stat stat-1">
+                                            <div class="label">Por clase de fuente:</div>
+                                            <div id="chart-fuente"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block" id="block2">
+                            <div class="empresas">
+                                <div class="total"></div>
+                                <div class="empresas-conflictos"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post">
+        <header class="post-header">
+            <div class="container">
+                <h1 class="post-title">Lorem ipsum dolor sit amet</h1>
+                <div class="post-abstract">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                    hic eveniet esse sapiente architecto cupiditate.
+                </div>
+                <div class="post-byline">
+                    Por
+                    <a href="https://www.lipsum.com/">Lorem ipsum</a> y
+                    <a href="https://www.lipsum.com/">Lorem ipsum</a>
+                </div>
+                <div class="post-date">
+                    30 de Noviembre, 2017
+                </div>
+            </div>
+        </header>
+        <div class="post-body">
+            <div class="post-content">
+                <div class="container">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                        hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere impedit. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos
+                        voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere
+                        impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus
+                        vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis,
+                        omnis ut est facere impedit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                        hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere impedit. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos
+                        voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere
+                        impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus
+                        vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis,
+                        omnis ut est facere impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis,
+                        ducimus vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem
+                        officiis, omnis ut est facere impedit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                        hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere impedit. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos
+                        voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere
+                        impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus
+                        vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis,
+                        omnis ut est facere impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis,
+                        ducimus vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem
+                        officiis, omnis ut est facere impedit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                        hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere impedit. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos
+                        voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere
+                        impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus
+                        vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis,
+                        omnis ut est facere impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis,
+                        ducimus vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem
+                        officiis, omnis ut est facere impedit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                        hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere impedit. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos
+                        voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere
+                        impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus
+                        vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem officiis,
+                        omnis ut est facere impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis,
+                        ducimus vel possimus, quos voluptate deserunt hic eveniet esse sapiente architecto cupiditate. Rem
+                        officiis, omnis ut est facere impedit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                        hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere impedit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                        hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere impedit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at perspiciatis, ducimus vel possimus, quos voluptate deserunt
+                        hic eveniet esse sapiente architecto cupiditate. Rem officiis, omnis ut est facere impedit.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="vendor/chosen.jquery.min.js"></script>
+    <script src="vendor/d3-cartogram.min.js"></script>
+    <script src="vendor/textures.min.js"></script>
+    <script src="vendor/typed.min.js"></script>
+    <!-- Load billboard.js with style -->
+    <script src="vendor/billboard.min.js"></script>
+    <link rel="stylesheet" href="vendor/billboard.min.css">
+    <script src="dist/scripts/main.js"></script>
+</body>
+
+</html>
