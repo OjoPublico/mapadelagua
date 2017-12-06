@@ -240,8 +240,11 @@ let topogramAgua = function (options) {
             if (self.data.departamentos[departamento] === undefined) {
                 self.data.departamentos[departamento] = {
                     'name': departamento,
-                    cuencas: []
+                    empresas: []
                 };
+            }
+            if ($.inArray(razon_social, self.data.departamentos[departamento].empresas) == -1) {
+                self.data.departamentos[departamento].empresas.push(razon_social);
             }
         });
 
@@ -272,7 +275,6 @@ let topogramAgua = function (options) {
             self.filter_dh[name] = !self.filter_dh[name];
             self.renderCuencas('nro_licencias');
         });
-
 
         $("#close-info").click(function () {
             $(".modal").hide();
@@ -307,21 +309,30 @@ let topogramAgua = function (options) {
         $("#select-departamento").change(function () {
             let val = this.value;
             self.departamento_selected = val;
+            self.updateEmpresasSelect();
             self.updateResults();
         });
+        self.updateEmpresasSelect();
     };
 
     self.updateEmpresasSelect = function () {
+        $("#select-empresa").html('<option value="todos" selected>Todos</option>');
+
         let temp = [];
-        $.each(self.data.empresas, function (key, element) {
-            temp.push(element.name);
-        });
+        if (self.departamento_selected == 'todos') {
+            $.each(self.data.empresas, function (key, element) {
+                temp.push(element.name);
+            });
+        } else {
+            temp = self.current_empresas = self.data.departamentos[self.departamento_selected].empresas;
+        }
         temp.sort();
         temp.forEach(function (element) {
             $("#select-empresa").append($("<option></option>").text(element));
         });
 
         $("#select-empresa").chosen();
+        $("#select-empresa").trigger("chosen:updated");
         $("#select-empresa").change(function () {
             let val = this.value;
             self.empresa_selected = val;
