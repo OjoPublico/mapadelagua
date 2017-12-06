@@ -12,6 +12,7 @@ body.modal-active {
     width: 100%;
     z-index: 1001;
     transition: opacity 0.25s ease 0s;
+    overflow: hidden;
 
     .bg {
         position: absolute;
@@ -32,6 +33,16 @@ body.modal-active {
     }
     #bg2 {
         background-image: url('../images/galeria/000170782W.jpg');
+    }
+
+    .landing-video {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .cover {
