@@ -11,7 +11,7 @@ var typed = new Typed('#landing-text', {
     typeSpeed: 30,
     backDelay: 1500,
     onStringTyped: function () {
-        if (id == 1) {
+        /* if (id == 1) {
             $(".btn-go").css('opacity', 1);
             $("#bg2").css("transition", "opacity 1.25s ease 0s");
             $("#bg2").css("filter", "blur(5px)");
@@ -23,6 +23,6 @@ var typed = new Typed('#landing-text', {
             }, 1750);
 
             id = (id + 1) % 3;
-        }
+        } */
     }
 });
