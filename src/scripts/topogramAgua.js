@@ -96,7 +96,7 @@ let topogramAgua = function (options) {
 
         if (self.width < 768) {
             self.svg
-                // .on("wheel", null)
+                .on("wheel", null)
                 .on("wheel.zoom", null);
         }
     };

@@ -12,6 +12,7 @@ body.modal-active {
     z-index: 1001;
     transition: opacity 0.25s ease 0s;
     overflow: hidden;
+    background-color: #111;
     @media screen and (max-width: 768px) {
         // height: 1000px;
     }
