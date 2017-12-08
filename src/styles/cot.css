@@ -70,6 +70,7 @@ a.new .img img{
 	font-size: 35px;
 	margin-bottom: 30px;
 	margin-top: 40px;
+	text-transform: uppercase;
 }
 
 .post-body strong{
@@ -82,6 +83,86 @@ footer{
 
 footer span{
 	font-weight: 700;
+}
+
+.hwidone{
+	color: #fff;
+	text-transform: uppercase;
+	padding: 15px 35px;
+	padding-bottom: 16px;
+	font-size: 16px;
+	margin-left: 15px;
+	font-weight: 700;
+	display: inline-block;
+	border: 2px solid #fff;
+	cursor: pointer;
+	margin-top: 30px;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+
+.hwidone-cont{
+	display: none;
+	position: fixed;
+	z-index: 1300;
+	width: 100%;
+	top: 0px;
+	background: #fff;
+	height: 100%;
+	overflow: auto;
+}
+
+.close-hwid{
+	position: fixed;
+	right: 20px;
+	top: 20px;
+	cursor: pointer;
+}
+
+.landing .cover{
+	background-color: rgba(17,17,17,.20);
+}
+
+.landing .text{
+	color: #fff;
+	font-weight: 400;
+	font-size: 19px;
+	margin-bottom: 40px;
+}
+
+.post-body p a{
+	color: #000 !important;
+	text-decoration: none !important;
+	border-bottom: 1px solid #909090;
+	padding-bottom: 1px;
+	font-weight: 700;
+}
+
+p.blackquote{
+	font-family: Oswald,Arial,Helvetica,sans-serif;
+	font-size: 35px;
+	line-height: 1.3;
+	border-bottom: 2px solid #000;
+	border-top: 2px solid #000;
+	padding: 20px 0px;
+	padding-bottom: 25px;
+	margin-bottom: 40px;
+	margin-top: 35px;
+}
+
+.p-image{
+	text-align: center;
+	font-size: 15px;
+	line-height: 1.2;
+}
+
+.p-image p{
+	padding: 10px 20px;
+}
+
+.p-image img{
+	width: 100%;
 }
 
 @media (max-width: 1100px) {
@@ -102,5 +183,34 @@ footer span{
 
 	.car-next{
 		right: 2px;
+	}
+	.landing .bg, .landing .landing-video{
+		height: 100%;
+		width: auto;
+	}
+}
+
+.leernota{
+	border: 2px solid #fff;
+	font-size: 17px;
+	text-transform: uppercase;
+	color: #fff !important;
+	font-weight: 700;
+	text-decoration: none !important;
+	padding: 14px 30px;
+	padding-bottom: 15px;
+	margin-left: 10px;
+}
+
+@media (max-width: 640px){
+	.landing .content{
+		position: static;
+		width: auto;
+		transform: none;
+		margin: 30px;
+		margin-top: 70px;
+	}
+	.landing .content h1{
+		font-size: 60px;
 	}
 }
