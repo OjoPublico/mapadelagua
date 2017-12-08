@@ -121,17 +121,6 @@ footer span{
 	cursor: pointer;
 }
 
-.landing .cover{
-	background-color: rgba(17,17,17,.20);
-}
-
-.landing .text{
-	color: #fff;
-	font-weight: 400;
-	font-size: 19px;
-	margin-bottom: 40px;
-}
-
 .post-body p a{
 	color: #000 !important;
 	text-decoration: none !important;
@@ -179,10 +168,6 @@ small.small-p{
 	margin-right: 15px;
 }
 
-.landing .content h1{
-		font-size: 80px;
-}
-
 .viz-container .aside .abstract{
 	font-size: 15px;
 	line-height: 1.45;
@@ -220,22 +205,5 @@ small.small-p{
 
 	.car-next{
 		right: 2px;
-	}
-	.landing .bg, .landing .landing-video{
-		height: 100%;
-		width: auto;
-	}
-}
-
-@media (max-width: 640px){
-	.landing .content{
-		position: static;
-		width: auto;
-		transform: none;
-		margin: 30px;
-		margin-top: 70px;
-	}
-	.landing .content h1{
-		font-size: 60px;
 	}
 }

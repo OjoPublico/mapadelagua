@@ -9,9 +9,6 @@
 
     &-fixed {
         position: fixed;
-        @media screen and (max-width: 678px) {
-            position: absolute;
-        }
     }
 
     .logo-op {

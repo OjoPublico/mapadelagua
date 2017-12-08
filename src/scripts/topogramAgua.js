@@ -41,6 +41,9 @@ let topogramAgua = function (options) {
     self.transform = d3.zoomIdentity;
 
     self.init = function () {
+        if($(window).width() < 768) {
+            self.width = $(window).width();
+        }
         self.projection = d3.geoMercator()
             .scale(self.scale)
             .center(self.center)
@@ -90,6 +93,12 @@ let topogramAgua = function (options) {
         });
 
         self.svg.call(self.zoom);
+
+        if (self.width < 768) {
+            self.svg
+                // .on("wheel", null)
+                .on("wheel.zoom", null);
+        }
     };
 
     self.loadData = function () {
@@ -119,6 +128,7 @@ let topogramAgua = function (options) {
 
                     $("#btn-go").click(function () {
                         $(".landing").css('opacity', 0);
+                        $(".viz-container").addClass('on');
                         setTimeout(function () {
                             $(".landing").css('display', 'none');
                         }, 250);
@@ -431,7 +441,7 @@ let topogramAgua = function (options) {
                 bindto: "#chart-fuente",
                 "size": {
                     "height": 160,
-                    "width": 200,
+                    "width": self.width < 400 ? 160 : 200,
                 },
                 data: {
                     type: "pie",
@@ -554,7 +564,7 @@ let topogramAgua = function (options) {
 
 
     self.showTooltip = function (d, flag) {
-        if(self.data.cuencas[d.properties.CODIGO] == undefined) return;
+        if (self.data.cuencas[d.properties.CODIGO] == undefined) return;
         let tooltip = d3.select("#map-tooltip");
         let cords, left, top;
         if (!flag) {
@@ -570,18 +580,18 @@ let topogramAgua = function (options) {
 
         tooltip.select('.nombre').text(d.properties.NOMBRE);
         var ta = '';
-            var plur = {
-                'Autorización': 'Autorizaciones',
-                'Licencia': 'Licencias',
-                'Permiso': 'Permisos',
-            };
-            $.each(self.data.cuencas[d.properties.CODIGO].resolucion, function (key, ee) {
-                if (ee > 1) {
-                    ta += '<span>(' + ee + ')</span>' + plur[key] + '<br>';
-                } else if (ee == 1) {
-                    ta += '<span>(' + ee + ')</span>' + key + '<br>';
-                }
-            });
+        var plur = {
+            'Autorización': 'Autorizaciones',
+            'Licencia': 'Licencias',
+            'Permiso': 'Permisos',
+        };
+        $.each(self.data.cuencas[d.properties.CODIGO].resolucion, function (key, ee) {
+            if (ee > 1) {
+                ta += '<span>(' + ee + ')</span>' + plur[key] + '<br>';
+            } else if (ee == 1) {
+                ta += '<span>(' + ee + ')</span>' + key + '<br>';
+            }
+        });
         tooltip.select('.nro').html(ta);
         tooltip
             .style('display', 'block')

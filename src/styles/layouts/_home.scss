@@ -1,5 +1,4 @@
 $aside-width: 320px;
-
 body.modal-active {
     overflow-y: hidden;
 }
@@ -13,28 +12,9 @@ body.modal-active {
     z-index: 1001;
     transition: opacity 0.25s ease 0s;
     overflow: hidden;
-
-    .bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background-size: cover;
-        background-position: center center;
-        opacity: 0;
-        transition: opacity 0.5s ease 0s;
+    @media screen and (max-width: 768px) {
+        // height: 1000px;
     }
-    #bg0 {
-        background-image: url('../images/galeria/000399637w.jpg');
-        opacity: 1;
-    }
-    #bg1 {
-        background-image: url('../images/galeria/000274160W.jpg');
-    }
-    #bg2 {
-        background-image: url('../images/galeria/000170782W.jpg');
-    }
-
     .landing-video {
         position: absolute;
         width: 100%;
@@ -43,13 +23,16 @@ body.modal-active {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        @media screen and (max-width: 480px) {
+            height: 105%;
+            width: auto;
+        }
     }
-
     .cover {
         position: relative;
         width: 100%;
         height: 100%;
-        background-color: rgba(17, 17, 17, 0.75);
+        background-color: rgba(17, 17, 17, 0.5);
     }
     .content {
         position: absolute;
@@ -57,29 +40,34 @@ body.modal-active {
         left: 50%;
         transform: translate(-50%, -50%);
         width: 600px;
-
+        @media screen and (max-width: 768px) {
+            width: 90%;
+        }
         h1 {
             font-family: 'Encode Sans Condensed', sans-serif;
             font-weight: 900;
-            font-size: 75px;
+            font-size: 80px;
             line-height: 85px;
             color: #fff;
             margin-bottom: 30px;
+            @media screen and (max-width: 768px) {
+                font-size: 40px;
+                line-height: 50px;
+            }
         }
         p,
         .landing-text {
             font-family: 'Lato', Arial, Helvetica, sans-serif;
-            font-size: 26px;
+            font-size: 19px;
             font-weight: 400;
-            line-height: 40px;
             color: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            @media screen and (max-width: 768px) {
+                margin-bottom: 20px;
+            }
         }
         .typed-cursor {
             display: none;
-        }
-        .landing-text {
-            min-height: 140px;
         }
         .btn {
             border: solid 2px #fff;
@@ -93,9 +81,14 @@ body.modal-active {
             cursor: pointer;
             transition: all 0.5s ease 0s;
             margin-right: 20px;
-
             &:hover {
                 background-color: rgba(161, 168, 168, 0.5);
+            }
+            @media screen and (max-width: 768px) {
+                width: 150px;
+                font-size: 15px;
+                padding: 10px;
+                margin-bottom: 10px;
             }
         }
     }
@@ -108,6 +101,7 @@ body.modal-active {
     position: relative;
     background-color: #363636;
     color: #fff;
+    overflow: hidden;
     .aside {
         position: absolute;
         top: 0;
@@ -116,7 +110,6 @@ body.modal-active {
         height: 100%;
         z-index: 99;
         padding: 20px;
-
         .title {
             font-family: 'Oswald', Arial, Helvetica, sans-serif;
             font-family: 'Encode Sans Condensed', sans-serif;
@@ -144,11 +137,9 @@ body.modal-active {
             text-align: center;
             color: #fff;
             font-size: 16px;
-            font-weight: 700;
-            // cursor: pointer;
+            font-weight: 700; // cursor: pointer;
             transition: all 0.75s ease 0s;
             background-color: #242424;
-
             &.alta {
                 color: #ffeda0;
                 border: solid 2px #ffeda0;
@@ -205,7 +196,6 @@ body.modal-active {
                     color: #fff;
                     cursor: pointer;
                     transition: all 0.25s ease 0s;
-        
                     &.item1 {
                         color: #111;
                     }
@@ -240,18 +230,6 @@ body.modal-active {
             }
         }
     }
-
-    .modal {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: rgba(17, 17, 17, 0.5);
-        z-index: 110;
-        display: none;
-        overflow-y: scroll;
-    }
     #btn-hw {
         border: solid 2px #fff;
         padding: 15px 50px;
@@ -268,9 +246,50 @@ body.modal-active {
         right: 20px;
         bottom: 20px;
         z-index: 100;
-
+        @media screen and (max-width: 768px) {
+            width: 150px;
+            font-size: 15px;
+            padding: 10px;
+        }
         &:hover {
             background-color: rgba(161, 168, 168, 0.5);
+        }
+    }
+    &.on {
+        @media screen and (max-width: 768px) {
+            height: 1600px;
+            .aside {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            .map-container {
+                width: 100%;
+                margin-left: 0;
+                height: 550px;
+            }
+            .results {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(17, 17, 17, 0.5);
+        z-index: 110;
+        display: none;
+        overflow-y: scroll;
+        @media screen and (max-width: 768px) {
+            height: calc(100vh - 50px);
         }
     }
     .cuenca-info {
@@ -278,20 +297,27 @@ body.modal-active {
         top: 20px;
         left: 50%;
         width: 550px;
-        background-color: #ffffff;
+        background-color: #fff;
         color: #111;
         padding: 30px;
         min-height: 400px;
         transform: translate(-50%, 0);
         margin-bottom: 20px;
-
         border-radius: 5px;
         box-shadow: 1px 1px 2px rgba(66, 66, 66, 0.5);
-        
+        @media screen and (max-width: 768px) {
+            top: 0;
+            width: 100%;
+            padding: 10px;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
         .info-wrapper {
             margin-top: 40px;
             border: solid 1px #111;
-            
+            @media screen and (max-width: 768px) {
+                margin-top: 35px;
+            }
             .nombre {
                 font-family: 'Oswald', Arial, Helvetica, sans-serif;
                 font-size: 28px;
@@ -300,7 +326,6 @@ body.modal-active {
                 border-bottom: solid 1px #111;
                 text-align: center;
             }
-
             .row {
                 display: flex;
                 border-bottom: solid 1px #111;
@@ -312,22 +337,21 @@ body.modal-active {
                 width: 50%;
                 padding: 7px 10px;
                 border-right: solid 1px #111;
+                @media screen and (max-width: 768px) {
+                    padding: 3px;
+                }
                 &:last-child {
                     border-right: none;
                 }
-
                 &-1 {
                     width: 100%;
                 }
-
                 &-2 {
                     width: 50%;
                 }
-
                 &-3 {
                     width: 33.3333%;
                 }
-
                 .label {
                     color: #111;
                     font-size: 14px;
@@ -376,7 +400,6 @@ body.modal-active {
                         border-top-right-radius: 5px;
                         border-top-left-radius: 5px;
                     }
-
                     img {
                         height: 20px;
                         width: 20px;
@@ -410,7 +433,6 @@ body.modal-active {
                         padding: 10px;
                         border-bottom: solid 1px #111;
                         font-weight: 700;
-
                         span {
                             font-size: 20px;
                         }
@@ -430,7 +452,6 @@ body.modal-active {
                                 font-size: 17px;
                                 line-height: 24px;
                                 margin-bottom: 10px;
-
                                 img {
                                     margin-top: -4px;
                                     height: 22px;
@@ -454,7 +475,6 @@ body.modal-active {
                                     margin-bottom: 5px;
                                 }
                             }
-
                             &.active {
                                 .afectados {
                                     display: block;
@@ -468,32 +488,27 @@ body.modal-active {
                 }
             }
         }
-
         .cuenca-map {
             width: 100%;
             height: 200px;
             background-color: #e8f3f3;
             border-bottom: solid 1px #111;
-
             #cuenca-map {
                 width: 100%;
                 height: 100%;
-
                 .departamento-label {
                     font-size: 7px;
                 }
             }
         }
-
         .btn-close {
             float: right;
             background-color: transparent;
             border: solid 1px #111;
             border-radius: 0px;
-            padding: 7px 12px; 
+            padding: 7px 12px;
             cursor: pointer;
             transition: all 0.2s ease 0s;
-
             &:hover {
                 background-color: #111;
                 color: #fff;
@@ -507,7 +522,6 @@ body.modal-active {
         width: 300px;
         height: 100%;
         padding: 10px;
-
         .label {
             font-size: 18px;
             font-weight: 700;
@@ -515,6 +529,10 @@ body.modal-active {
         }
         .chosen-select {
             width: 100%;
+            @media screen and (max-width: 768px) {
+                background-color: #fff;
+                height: 30px;
+            }
         }
         .chosen-container {
             width: 100%!important;
@@ -555,7 +573,6 @@ body.modal-active {
     }
 }
 
-
 .map-container {
     position: relative;
     margin-left: $aside-width;
@@ -564,12 +581,10 @@ body.modal-active {
     #map {
         width: 100%;
         height: 100%;
-
         path {
             stroke-width: 0.75px;
             stroke: #a3a3a3;
             cursor: pointer;
-
             &:hover {
                 stroke-width: 1px;
             }
@@ -594,7 +609,6 @@ body.modal-active {
             img {
                 width: 100%;
             }
-
             &:hover {
                 opacity: 1;
             }
@@ -611,20 +625,18 @@ body.modal-active {
         display: none;
         color: #111;
         pointer-events: none;
-
         &:after {
             position: absolute;
             content: " ";
             top: 100%;
             left: 50%;
             transform: translate(-50%, 0);
-            width: 0; 
-            height: 0; 
+            width: 0;
+            height: 0;
             border-left: 7px solid transparent;
             border-right: 7px solid transparent;
             border-top: 7px solid rgb(255, 255, 255);
         }
-
         .nombre {
             margin-bottom: 5px;
             font-weight: 700;
@@ -634,7 +646,6 @@ body.modal-active {
         .nro {
             text-align: center;
             margin: 0 auto;
-
             span {
                 margin-right: 10px;
             }
