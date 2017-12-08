@@ -76,6 +76,19 @@ let topogramAgua = function (options) {
                 self.g.attr("transform", self.transform);
             });
 
+        // Zoom in
+        d3.select("#btn-zoom-in").on('click', function () {
+            self.zoom_value = d3.zoomTransform(self.svg.node()).k + 0.5;
+            self.svg.transition().duration(100)
+                .call(self.zoom.scaleTo, self.zoom_value);
+        });
+        // Zoom out
+        d3.select("#btn-zoom-out").on('click', function () {
+            self.zoom_value = d3.zoomTransform(self.svg.node()).k - 0.5;
+            self.svg.transition().duration(100)
+                .call(self.zoom.scaleTo, self.zoom_value);
+        });
+
         self.svg.call(self.zoom);
     };
 
@@ -104,7 +117,7 @@ let topogramAgua = function (options) {
                             }
                         });
 
-                    $(".btn-go").click(function () {
+                    $("#btn-go").click(function () {
                         $(".landing").css('opacity', 0);
                         setTimeout(function () {
                             $(".landing").css('display', 'none');
@@ -541,6 +554,7 @@ let topogramAgua = function (options) {
 
 
     self.showTooltip = function (d, flag) {
+        if(self.data.cuencas[d.properties.CODIGO] == undefined) return;
         let tooltip = d3.select("#map-tooltip");
         let cords, left, top;
         if (!flag) {
@@ -555,6 +569,20 @@ let topogramAgua = function (options) {
         }
 
         tooltip.select('.nombre').text(d.properties.NOMBRE);
+        var ta = '';
+            var plur = {
+                'Autorización': 'Autorizaciones',
+                'Licencia': 'Licencias',
+                'Permiso': 'Permisos',
+            };
+            $.each(self.data.cuencas[d.properties.CODIGO].resolucion, function (key, ee) {
+                if (ee > 1) {
+                    ta += '<span>(' + ee + ')</span>' + plur[key] + '<br>';
+                } else if (ee == 1) {
+                    ta += '<span>(' + ee + ')</span>' + key + '<br>';
+                }
+            });
+        tooltip.select('.nro').html(ta);
         tooltip
             .style('display', 'block')
             .style('left', left + 'px')

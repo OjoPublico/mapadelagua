@@ -8,7 +8,7 @@
     <title></title>
     <meta name="description" content="">
     <link rel="shortcut icon" href="https://ojo-publico.com/favicon.ico" type="image/vnd.microsoft.icon" />
-    <link rel="stylesheet" type="text/css" href="src/scripts/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendor/owl.carousel.min.css">
     <link rel="stylesheet" href="vendor/chosen.css">
     <link rel="stylesheet" href="dist/styles/screen.min.css">
     <link rel="stylesheet" type="text/css" href="src/styles/cot.css">
@@ -23,36 +23,38 @@
         </nav>
     </header>
     <div class="landing">
-        <!-- <div class="bg" id="bg0"></div>
-        <div class="bg" id="bg1"></div>
-        <div class="bg" id="bg2"></div> -->
         <video class="landing-video" autoplay loop>
             <source src="src/video/prueba intro 3.mp4" type="video/mp4">
-            <!-- <source src="src/video/Secuencia 01.mp4" type="video/mp4"> -->
         </video>
         <div class="cover">
             <div class="content">
                 <h1>Minería extrae agua de zonas en riesgo de sequía</h1>
                 <div class="text">
-                    Los conflictos mineros asociados a los usos del agua se han incrementado en los últimos años. Un mapa construido por Ojo-Publico.com muestra que 31 empresas dedicadas a la extracción de minerales tienen licencias para extraer y usar agua de ríos, quebradas y acuíferos en 12 zonas declaradas en riesgo por escasez hídrica. La compañía con más permisos es Southern Copper.
+                    Los conflictos mineros asociados a los usos del agua se han incrementado en los últimos años. Un mapa construido por Ojo-Publico.com
+                    muestra que 31 empresas dedicadas a la extracción de minerales tienen licencias para extraer y usar agua
+                    de ríos, quebradas y acuíferos en 12 zonas declaradas en riesgo por escasez hídrica. La compañía con
+                    más permisos es Southern Copper.
                 </div>
-                <button class="btn-go">Explorar</button>
-                <a href="#aqui" class="leernota">Leer nota</a>
+                <button id="btn-go" class="btn">Explorar</button>
+                <button id="btn-post" class="btn">Leer nota</a>
             </div>
         </div>
     </div>
     <div class="viz-container">
-        <div class="hwidone">¿Cómo se hizo?</div>
         <div class="aside">
             <h1 class="title">Minería y conflictos en zonas de sequía</h1>
             <div class="abstract">
-                Un mapa interactivo que permite conocer el número de licencias que el Gobierno otorgó a las empresas mineras en los últimos 45 años para extraer y usar agua de ríos, quebradas y acuíferos en todo el país. Algunas se concentran en zonas con limitadas reservas de agua o en riesgo de sequía, y otras están relacionadas a protestas ambientales por más acceso y menos contaminación de este recurso.
+                Un mapa interactivo que permite conocer el número de licencias que el Gobierno otorgó a las empresas mineras en los últimos
+                45 años para extraer y usar agua de ríos, quebradas y acuíferos en todo el país. Algunas se concentran en
+                zonas con limitadas reservas de agua o en riesgo de sequía, y otras están relacionadas a protestas ambientales
+                por más acceso y menos contaminación de este recurso.
             </div>
             <div class="filter">
-                <div class="label">Cuencas por reservas de agua:</div>
-                <div class="dh-check alta" id="check-alta" data-name="Alta">Alto</div>
-                <div class="dh-check media" id="check-media" data-name="Media">Medio</div>
-                <div class="dh-check baja" id="check-bajaA" data-name="Baja">Bajo</div>
+                <div class="label">Reserva de agua por cuencas:</div>
+                <div class="dh-check alta" id="check-alta" data-name="Alta">Alta</div>
+                <div class="dh-check media" id="check-media" data-name="Media">Media</div>
+                <div class="dh-check baja" id="check-bajaA" data-name="Baja">Baja</div>
+                <div class="dh-check none">Sin licencias registradas</div>
             </div>
             <div class="switch">
                 <div class="label">Mapa por número de licencias:</div>
@@ -66,6 +68,11 @@
         <div class="map-container">
             <div class="tooltip" id="map-tooltip">
                 <div class="nombre"></div>
+                <div class="nro"></div>
+            </div>
+            <div class="zoom-controls">
+                <div class="zoom-in" id="btn-zoom-in"><img src="dist/images/zoom-in.png" alt=""></div>
+                <div class="zoom-out" id="btn-zoom-out"><img src="dist/images/zoom-out.png" alt=""></div>
             </div>
             <svg id="map"></svg>
         </div>
@@ -85,14 +92,11 @@
                     </select>
                 </div>
             </div>
-            <br>
-            
-            <div class="leyend-sq"></div>
-            Sin licencias registradas
 
             <div class="label" id="results-label">Cuencas:</div>
             <div class="list" id="results"></div>
         </div>
+        <div class="btn" id="btn-hw">¿Cómo se hizo?</div>
         <div class="modal">
             <div class="cuenca-info" id="cuenca-info">
                 <button class="btn-close" id="close-info">Cerrar</button>
@@ -103,7 +107,7 @@
                     </div>
                     <div class="row">
                         <div class="stat stat-3">
-                            <div class="label">Volumen de agua disponible:</div>
+                            <div class="label">Reserva de agua por cuenca:</div>
                             <div class="value disponibilidad-hidrica"></div>
                         </div>
                         <div class="stat stat-3">
@@ -160,7 +164,7 @@
             </div>
         </div>
     </div>
-    <div class="post" id="aqui">
+    <div class="post" id="post">
         <header class="post-header">
             <div class="container">
                 <div class="post-byline">
@@ -176,34 +180,58 @@
             <div class="post-content">
                 <div class="container">
                     <p>
-                        <span class="capitalize">E</span>n noviembre del 2016 la sierra central del Perú afrontó la temporada más seca de los últimos 30 años. Según el Servicio Nacional de Meteorología (<a target="_blank" href="http://www.senamhi.gob.pe/?p=prensa&n=556">Senamhi</a>), el fenómeno se extendió a Moquegua, Arequipa y Tacna, departamentos que habían sufrido un hecho similar el 2008. Durante todo el mes no se registraron lluvias y la población tuvo que potabilizar el agua estancada en sus represas para beber.
+                        <span class="capitalize">E</span>n noviembre del 2016 la sierra central del Perú afrontó la temporada más seca de los últimos
+                        30 años. Según el Servicio Nacional de Meteorología (
+                        <a target="_blank" href="http://www.senamhi.gob.pe/?p=prensa&n=556">Senamhi</a>), el fenómeno se extendió a Moquegua, Arequipa y Tacna, departamentos que habían sufrido
+                        un hecho similar el 2008. Durante todo el mes no se registraron lluvias y la población tuvo que potabilizar
+                        el agua estancada en sus represas para beber.
                     </p>
                     <p>
-                        Este no fue un hecho aislado. Durante la última década, el Instituto Nacional de Defensa Civil (Indeci) ha reportado <a target="_blank" href="http://sinpad.indeci.gob.pe/sinpad/emergencias/mapa/ListadoEmergencias.asp?emerg=1&estado=0&ano=2003&ord=2&region=00&sltEmer=1&sltEstado=0&sltAno=2003&sltOrden=2&sltRegion=00">1.534 alertas por sequía</a> en territorios alto andinos, donde la agricultura es la principal fuente económica de la población. En varias de estas zonas también está presente la minería, una actividad extractiva que utiliza grandes volúmenes de agua.
+                        Este no fue un hecho aislado. Durante la última década, el Instituto Nacional de Defensa Civil (Indeci) ha reportado
+                        <a target="_blank" href="http://sinpad.indeci.gob.pe/sinpad/emergencias/mapa/ListadoEmergencias.asp?emerg=1&estado=0&ano=2003&ord=2&region=00&sltEmer=1&sltEstado=0&sltAno=2003&sltOrden=2&sltRegion=00">1.534 alertas por sequía</a> en territorios alto andinos, donde la agricultura es la principal fuente
+                        económica de la población. En varias de estas zonas también está presente la minería, una actividad
+                        extractiva que utiliza grandes volúmenes de agua.
                     </p>
                     <p>
-                        Ojo-Publico.com obtuvo el detalle de las 1.810 licencias, autorizaciones y permisos que el Gobierno otorgó a 331 empresas mineras para que puedan explotar el mismo número de fuentes de agua  con el fin de procesar sus minerales, abastecer a sus campamentos o reducir el polvo en sus operaciones. Las licencias, a diferencia de los otros dos tipos de resoluciones, no tienen fecha de caducidad, por lo que podemos decir que al menos 736 de ellas siguen en uso.
+                        Ojo-Publico.com obtuvo el detalle de las 1.810 licencias, autorizaciones y permisos que el Gobierno otorgó a 331 empresas
+                        mineras para que puedan explotar el mismo número de fuentes de agua con el fin de procesar sus minerales,
+                        abastecer a sus campamentos o reducir el polvo en sus operaciones. Las licencias, a diferencia de
+                        los otros dos tipos de resoluciones, no tienen fecha de caducidad, por lo que podemos decir que al
+                        menos 736 de ellas siguen en uso.
                     </p>
                 </div>
                 <div class="p-image">
                     <img src="src/images/photos/FOTO1.jpg">
-                    <p>CUENCAS. Son 159 las cuencas por las que discurre toda el agua dulce del Perú. La más grande de ellas es la cuenca del Marañón. /Andina</p>
+                    <p>CUENCAS. Son 159 las cuencas por las que discurre toda el agua dulce del Perú. La más grande de ellas
+                        es la cuenca del Marañón. /Andina</p>
                 </div>
                 <div class="container">
                     <p>
-                        La data reúne las resoluciones emitidas desde 1970 a la fecha y nos permite conocer que en este tiempo la minería consiguió 155 resoluciones en 12 zonas del Perú con seria escasez de agua. Estas fueron entregadas, primero, por el Ministerio de Agricultura; luego por el Instituto Nacional de Recursos Naturales (Inrena) y finalmente, desde que fue creada el 2008, por la <a target="_blank" href="http://snirh.ana.gob.pe/consultasSnirh/ConsDua2.aspx">Autoridad Nacional del Agua (ANA)</a>.
+                        La data reúne las resoluciones emitidas desde 1970 a la fecha y nos permite conocer que en este tiempo la minería consiguió
+                        155 resoluciones en 12 zonas del Perú con seria escasez de agua. Estas fueron entregadas, primero,
+                        por el Ministerio de Agricultura; luego por el Instituto Nacional de Recursos Naturales (Inrena)
+                        y finalmente, desde que fue creada el 2008, por la
+                        <a target="_blank" href="http://snirh.ana.gob.pe/consultasSnirh/ConsDua2.aspx">Autoridad Nacional del Agua (ANA)</a>.
                     </p>
                     <p>
-                        En la actualidad, 31 empresas mantienen licencias sobre 74 puntos de extracción en ríos, quebradas y acuíferos que confluyen en estos 12 territorios críticos, y que principalmente cruzan los departamentos de Tacna, Moquegua, Lima, La Libertad y Lambayeque.
+                        En la actualidad, 31 empresas mantienen licencias sobre 74 puntos de extracción en ríos, quebradas y acuíferos que confluyen
+                        en estos 12 territorios críticos, y que principalmente cruzan los departamentos de Tacna, Moquegua,
+                        Lima, La Libertad y Lambayeque.
                     </p>
                     <p class="blackquote">
                         El único balance hídrico nacional fue elaborado en 1979 y actualizado el 2012.
                     </p>
                     <p>
-                        Según esta data, otras 54 compañías mineras están facultadas hasta hoy a intervenir en zonas donde el agua es medianamente constante, como en Arequipa, una región donde 18 proyectos en fase de exploración y otros 13 en etapa de exploración usan este recurso para sus operaciones.
+                        Según esta data, otras 54 compañías mineras están facultadas hasta hoy a intervenir en zonas donde el agua es medianamente
+                        constante, como en Arequipa, una región donde 18 proyectos en fase de exploración y otros 13 en etapa
+                        de exploración usan este recurso para sus operaciones.
                     </p>
                     <p>
-                        El Gobierno sabe dónde fueron otorgadas las licencias de agua para uso minero, pero no el volumen real de la oferta y demanda que soporta cada cuenca: el único balance hídrico nacional fue elaborado en 1979 y actualizado el 2012. Recién el año pasado la Autoridad Nacional del Agua (ANA) terminó un <a href="http://www.ana.gob.pe/sites/default/files/publication/files/evaluacion_de_recursos_hidricos_de_doce_cuencas_0.pdf">estudio integral a 12 de las 159 cuencas existentes</a>, y estas no incluyen a las que están en riesgo de estrés hídrico en la zona sur del país.
+                        El Gobierno sabe dónde fueron otorgadas las licencias de agua para uso minero, pero no el volumen real de la oferta y demanda
+                        que soporta cada cuenca: el único balance hídrico nacional fue elaborado en 1979 y actualizado el
+                        2012. Recién el año pasado la Autoridad Nacional del Agua (ANA) terminó un
+                        <a href="http://www.ana.gob.pe/sites/default/files/publication/files/evaluacion_de_recursos_hidricos_de_doce_cuencas_0.pdf">estudio integral a 12 de las 159 cuencas existentes</a>, y estas no incluyen a las que están en riesgo
+                        de estrés hídrico en la zona sur del país.
                     </p>
                     <p>
                         Por eso, las zonas que disponen de poca agua o están en riesgo de sequía podrían ser mayores.
@@ -211,87 +239,149 @@
                 </div>
                 <div class="p-image">
                     <img src="src/images/photos/FOTO2.jpg">
-                    <p>DEMANDA. La minería usa agua para procesar el mineral, reducir el polvo en sus operaciones y para abastecer sus campamentos. /Andina</p>
+                    <p>DEMANDA. La minería usa agua para procesar el mineral, reducir el polvo en sus operaciones y para abastecer
+                        sus campamentos. /Andina</p>
                 </div>
                 <div class="container">
                     <h2>
                         LA DISPUTA POR EL RECURSO
                     </h2>
                     <p>
-                        Toda el agua dulce del Perú discurre por ríos, quebradas y acuíferos que se concentran en 159 territorios (cuencas), antes de perderse en el mar. La Autoridad Nacional del Agua (ANA) usa la información del Senamhi para clasificar estas cuencas de acuerdo al volumen de agua que tienen disponible para cada habitante, por año, y así determina cuáles son las zonas con afluencia de agua alta, media y baja. En esta última se encuentran las cuencas declaradas en riesgo de estrés hídrico o que han afrontado periodos de sequía.
+                        Toda el agua dulce del Perú discurre por ríos, quebradas y acuíferos que se concentran en 159 territorios (cuencas), antes
+                        de perderse en el mar. La Autoridad Nacional del Agua (ANA) usa la información del Senamhi para clasificar
+                        estas cuencas de acuerdo al volumen de agua que tienen disponible para cada habitante, por año, y
+                        así determina cuáles son las zonas con afluencia de agua alta, media y baja. En esta última se encuentran
+                        las cuencas declaradas en riesgo de estrés hídrico o que han afrontado periodos de sequía.
                     </p>
                     <p>
-                        <strong>Ojo-Publico.com</strong> reconstruyó esta información y elaboró un mapa con el fin de conocer en qué tipo de cuencas se les otorgó licencias a las compañías mineras. La data revela que la mayoría de permisos en zonas con escasez de agua se entregaron a las multinacionales mineras: Southern Cooper, del Grupo México; y Anglo American, del conglomerado del mismo nombre con sede en Londres. 
+                        <strong>Ojo-Publico.com</strong> reconstruyó esta información y elaboró un mapa con el fin de conocer en
+                        qué tipo de cuencas se les otorgó licencias a las compañías mineras. La data revela que la mayoría
+                        de permisos en zonas con escasez de agua se entregaron a las multinacionales mineras: Southern Cooper,
+                        del Grupo México; y Anglo American, del conglomerado del mismo nombre con sede en Londres.
                     </p>
                     <p>
-                        Southern Cooper está desplegada en Moquegua y Tacna, con sus minas de cobre Cuajone y Toquepala, pero también en Apurímac con su proyecto Los Chancas. Solo para atender las demandas de las dos primeras, <a href="https://ojo-publico.com/502/el-agua-que-las-empresas-mineras-no-pagan">la empresa usó 50.490 millones de litros de agua</a> el 2015, según su memoria anual. Anglo American, por su parte, es dueña de la cuprífera Quellaveco, en Moquegua, que el próximo año iniciará su fase de explotación.
+                        Southern Cooper está desplegada en Moquegua y Tacna, con sus minas de cobre Cuajone y Toquepala, pero también en Apurímac
+                        con su proyecto Los Chancas. Solo para atender las demandas de las dos primeras,
+                        <a href="https://ojo-publico.com/502/el-agua-que-las-empresas-mineras-no-pagan">la empresa usó 50.490 millones de litros de agua</a> el 2015, según su memoria anual. Anglo American,
+                        por su parte, es dueña de la cuprífera Quellaveco, en Moquegua, que el próximo año iniciará su fase
+                        de explotación.
                     </p>
                     <p>
-                        Ambas compañías –que ya fueron blanco de <a href="http://larepublica.pe/politica/641540-moquegua-alista-protesta-en-defensa-del-agua-y-medioambiente">protestas</a> de la población por el posible impacto ambiental de sus operaciones– obtuvieron resoluciones para extraer agua de 41 fuentes de agua de las cuencas Locumba Sama, Tambo, e Ilo-Moquegua, todas incluidas en las declaratorias de emergencia emitidas anualmente por el Gobierno. Incluso el 2009, mediante <a href="http://minagri.gob.pe/portal/download/pdf/marcolegal/normaslegales/decretossupremos/ds_004_2009_ag.pdf">Decreto Supremo 004</a>, el Ejecutivo confirmó el “agotamiento de los recursos hídricos” en los ríos Caplina y Locumba Sama, en Tacna, y dictó recomendaciones para preservar el agua del subsuelo.
+                        Ambas compañías –que ya fueron blanco de
+                        <a href="http://larepublica.pe/politica/641540-moquegua-alista-protesta-en-defensa-del-agua-y-medioambiente">protestas</a> de la población por el posible impacto ambiental de sus operaciones– obtuvieron resoluciones
+                        para extraer agua de 41 fuentes de agua de las cuencas Locumba Sama, Tambo, e Ilo-Moquegua, todas
+                        incluidas en las declaratorias de emergencia emitidas anualmente por el Gobierno. Incluso el 2009,
+                        mediante
+                        <a href="http://minagri.gob.pe/portal/download/pdf/marcolegal/normaslegales/decretossupremos/ds_004_2009_ag.pdf">Decreto Supremo 004</a>, el Ejecutivo confirmó el “agotamiento de los recursos hídricos” en los ríos
+                        Caplina y Locumba Sama, en Tacna, y dictó recomendaciones para preservar el agua del subsuelo.
                     </p>
-                 </div>
+                </div>
                 <div class="p-image">
                     <img src="src/images/photos/FOTO3.jpg">
-                    <p>CONGA. El proyecto Conga, en Cajamarca, fue paralizado luego de intensas protestas de la población que teme la contaminación de sus lagunas y cabeceras de cuenca. /Andina</p>
+                    <p>CONGA. El proyecto Conga, en Cajamarca, fue paralizado luego de intensas protestas de la población que
+                        teme la contaminación de sus lagunas y cabeceras de cuenca. /Andina</p>
                 </div>
                 <div class="container">
                     <p>
-                        Southern es la que mantendría el mayor número de licencias a la fecha, 15 en total, seguido de las empresas Minsur, en la cuenca del Rímac (Lima) y Yauliyacu en la cuenca Ushusuma (Tacna).
+                        Southern es la que mantendría el mayor número de licencias a la fecha, 15 en total, seguido de las empresas Minsur, en la
+                        cuenca del Rímac (Lima) y Yauliyacu en la cuenca Ushusuma (Tacna).
                     </p>
                     <p>
-                        Jorge Ghersi, gerente de agricultura del Gobierno Regional de Moquegua, explica los retos que afrontan los agricultores que conviven con la minería en esta temporada seca que se extenderá hasta fines de diciembre. 
+                        Jorge Ghersi, gerente de agricultura del Gobierno Regional de Moquegua, explica los retos que afrontan los agricultores que
+                        conviven con la minería en esta temporada seca que se extenderá hasta fines de diciembre.
                     </p>
                     <p>
-                        “Los cultivos de paltas, uvas y papas son nuestro principal sustento, pero por el déficit de lluvias que sufrimos las cosechas se redujeron en un 30%. La <a href="http://larepublica.pe/politica/1145716-cierran-compuertas-de-pasto-grande-a-tambo">represa Pasto Grande</a>, la única con la que contamos para emergencias como esta, ha acumulado este año solo 67 de los 200 millones de m3 que tiene de capacidad y por eso debemos usarla con restricciones. La poca agua que tenemos Si antes pedíamos una convivencia responsable con la minería, ahora es una exigencia”, agrega Ghersi.
+                        “Los cultivos de paltas, uvas y papas son nuestro principal sustento, pero por el déficit de lluvias que sufrimos las cosechas
+                        se redujeron en un 30%. La
+                        <a href="http://larepublica.pe/politica/1145716-cierran-compuertas-de-pasto-grande-a-tambo">represa Pasto Grande</a>, la única con la que contamos para emergencias como esta, ha acumulado este
+                        año solo 67 de los 200 millones de m3 que tiene de capacidad y por eso debemos usarla con restricciones.
+                        La poca agua que tenemos Si antes pedíamos una convivencia responsable con la minería, ahora es una
+                        exigencia”, agrega Ghersi.
                     </p>
                     <p class="blackquote">
                         La sequía del 2016 afectó el 30% de las cosechas en Moquegua.
                     </p>
                     <p>
-                        Moquegua y Arequipa, no solo han activado sus alarmas ante la actividad minera, sino también entre ellos mismos. El valle arequipeño de El Tambo, donde Southern Copper pretende retomar el proyecto Tía María, se riega con las filtraciones de la mencionada represa Pasto Grande, cuyas compuertas son controladas por su vecino: Moquegua. 
+                        Moquegua y Arequipa, no solo han activado sus alarmas ante la actividad minera, sino también entre ellos mismos. El valle
+                        arequipeño de El Tambo, donde Southern Copper pretende retomar el proyecto Tía María, se riega con
+                        las filtraciones de la mencionada represa Pasto Grande, cuyas compuertas son controladas por su vecino:
+                        Moquegua.
                     </p>
                     <p>
-                        Cada año esta región debería proveer a Arequipa 8.2 millones de m3 de agua, tal como se ordena en el Decreto Supremo 002-2008, pero desde el 2016, cuando se incrementó el riesgo de sequía, se niegan a hacerlo. Huber Valdivia, asesor en recursos hídricos del Gobierno Regional de Arequipa, explica que, ante la inacción de la ANA, presentarán en los próximos días una demanda penal contra Moquegua para obtener el recurso deseado. 
+                        Cada año esta región debería proveer a Arequipa 8.2 millones de m3 de agua, tal como se ordena en el Decreto Supremo 002-2008,
+                        pero desde el 2016, cuando se incrementó el riesgo de sequía, se niegan a hacerlo. Huber Valdivia,
+                        asesor en recursos hídricos del Gobierno Regional de Arequipa, explica que, ante la inacción de la
+                        ANA, presentarán en los próximos días una demanda penal contra Moquegua para obtener el recurso deseado.
                     </p>
                 </div>
                 <div class="p-image">
                     <img src="src/images/photos/FOTO4.jpg">
-                    <p>AREQUIPA. Souther Copper quiere retomar Tía María, proyecto paralizado desde el 2015 tras conflictos con la población que dejaron 419 heridos y 4 muertos. /La República
-</p>
+                    <p>AREQUIPA. Souther Copper quiere retomar Tía María, proyecto paralizado desde el 2015 tras conflictos
+                        con la población que dejaron 419 heridos y 4 muertos. /La República
+                    </p>
                 </div>
                 <div class="container">
                     <p>
-                        “Ya estamos en conflicto por el agua. Al problema con las regiones vecinas se suma la minería. Donde tenemos una agricultura deprimente no podemos consentir la actividad boyante de una minería que solo regala pelotas o camisetas. Con regalos no se está impulsando la agricultura, el desarrollo de las comunidades ni la protección del agua. Y ese debe ser el nuevo enfoque minero”, añade Valdivia.
+                        “Ya estamos en conflicto por el agua. Al problema con las regiones vecinas se suma la minería. Donde tenemos una agricultura
+                        deprimente no podemos consentir la actividad boyante de una minería que solo regala pelotas o camisetas.
+                        Con regalos no se está impulsando la agricultura, el desarrollo de las comunidades ni la protección
+                        del agua. Y ese debe ser el nuevo enfoque minero”, añade Valdivia.
                     </p>
                     <p>
-                        Por intermedio de la gerencia de comunicaciones y asuntos externos, respectivamente, pedimos entrevistas con voceros de las mineras Southern y Anglo American, pero no respondieron. Sin embargo, en su página web, Anglo American informó tras la crisis hídrica del 2016 se vio obligada a renunciar a la captación del agua del <a href="http://peru.angloamerican.com/medios/noticias/2016/2016-01-19a?sc_lang=es-es">río Asana</a> y han limitado su consumo usando el 65% de agua reciclada.
+                        Por intermedio de la gerencia de comunicaciones y asuntos externos, respectivamente, pedimos entrevistas con voceros de las
+                        mineras Southern y Anglo American, pero no respondieron. Sin embargo, en su página web, Anglo American
+                        informó tras la crisis hídrica del 2016 se vio obligada a renunciar a la captación del agua del
+                        <a href="http://peru.angloamerican.com/medios/noticias/2016/2016-01-19a?sc_lang=es-es">río Asana</a> y han limitado su consumo usando el 65% de agua reciclada.
                     </p>
                     <p>
-                        Southern, por su parte, ha confirmado que usará <a href="https://elcomercio.pe/economia/peru/southern-peru-listos-iniciar-proyecto-tia-maria-noticia-446754">agua desalinizada de mar</a> si el Gobierno le autoriza a continuar con el proyecto Tía María, en Arequipa, paralizada por graves protestas ante el miedo de la población por perder sus fuentes de agua.
+                        Southern, por su parte, ha confirmado que usará
+                        <a href="https://elcomercio.pe/economia/peru/southern-peru-listos-iniciar-proyecto-tia-maria-noticia-446754">agua desalinizada de mar</a> si el Gobierno le autoriza a continuar con el proyecto Tía María, en
+                        Arequipa, paralizada por graves protestas ante el miedo de la población por perder sus fuentes de
+                        agua.
                     </p>
                     <h2>
                         CONFLICTOS SOCIALES
                     </h2>
                     <p>
-                        Según el mapa construido por Ojo-Publico.com, el 78% de licencias de agua se entregó en zonas con elevado caudal, como en las quebradas de los ríos Mantaro y Marañón. Contrario a lo que se podría pensar, ello no exoneró a las empresas de la pugna por este recurso: muchas de las cuencas que aparecen con disponibilidad hídrica alta cruzan Áncash, Apurímac, Cajamarca y Puno, departamentos que están incluidos en la lista de conflictos socioambientales identificados la Defensoría del Pueblo.
+                        Según el mapa construido por Ojo-Publico.com, el 78% de licencias de agua se entregó en zonas con elevado caudal, como en
+                        las quebradas de los ríos Mantaro y Marañón. Contrario a lo que se podría pensar, ello no exoneró
+                        a las empresas de la pugna por este recurso: muchas de las cuencas que aparecen con disponibilidad
+                        hídrica alta cruzan Áncash, Apurímac, Cajamarca y Puno, departamentos que están incluidos en la lista
+                        de conflictos socioambientales identificados la Defensoría del Pueblo.
                     </p>
                     <p>
-                        Una de ellas es la minera Barrick Misquichilca, que tiene licencias para extraer agua en Áncash y dos reclamos de los caseríos Atupa, Antaurán y Mareniyoc por presuntamente haber secado sus manantiales y no brindarles la dotación de agua ofrecida a cambio. Según los reportes de la Defensoría, el diálogo entre ambas partes está abierto y la empresa indica que sí cumplió con todos los puntos de su estudio de impacto ambiental.
+                        Una de ellas es la minera Barrick Misquichilca, que tiene licencias para extraer agua en Áncash y dos reclamos de los caseríos
+                        Atupa, Antaurán y Mareniyoc por presuntamente haber secado sus manantiales y no brindarles la dotación
+                        de agua ofrecida a cambio. Según los reportes de la Defensoría, el diálogo entre ambas partes está
+                        abierto y la empresa indica que sí cumplió con todos los puntos de su estudio de impacto ambiental.
                     </p>
                     <p>
-                        El 25% de las 101 <a href="https://www.defensoria.gob.pe/temas.php?des=3">crisis sociales vigentes</a> que ha mapeado dicha institución está relacionada a la minería y el agua. Las protestas no solo giran en torno al acceso, sino a la calidad de este recurso y su posible contaminación, y desde el 2011 a la fecha han dejado 1.100 heridos y 42 muertos. Estas cifras incluyen a la actividad mineral formal y la ilegal.
+                        El 25% de las 101
+                        <a href="https://www.defensoria.gob.pe/temas.php?des=3">crisis sociales vigentes</a> que ha mapeado dicha institución está relacionada a la minería y el
+                        agua. Las protestas no solo giran en torno al acceso, sino a la calidad de este recurso y su posible
+                        contaminación, y desde el 2011 a la fecha han dejado 1.100 heridos y 42 muertos. Estas cifras incluyen
+                        a la actividad mineral formal y la ilegal.
                     </p>
                     <p>
-                        Jorge Ghersi, gerente regional de Moquegua, reconoce que la escasez de agua ha reactivado el rol fiscalizador de la población ante la presencia minera: solo en el último mes han recibido denuncias sobre la contaminación del <a href="https://diariocorreo.pe/edicion/moquegua/moquegua-ana-y-oefa-concluyen-que-hay-contaminacion-en-rio-coralaque-pero-cual-es-su-origen-756045/">río Coralaque</a> (donde opera la minera Aruntani) y un presunto mal manejo de residuos de Southern Copper en la cabecera de cuenca de la comunidad de Torata. 
+                        Jorge Ghersi, gerente regional de Moquegua, reconoce que la escasez de agua ha reactivado el rol fiscalizador de la población
+                        ante la presencia minera: solo en el último mes han recibido denuncias sobre la contaminación del
+                        <a href="https://diariocorreo.pe/edicion/moquegua/moquegua-ana-y-oefa-concluyen-que-hay-contaminacion-en-rio-coralaque-pero-cual-es-su-origen-756045/">río Coralaque</a> (donde opera la minera Aruntani) y un presunto mal manejo de residuos de Southern
+                        Copper en la cabecera de cuenca de la comunidad de Torata.
                     </p>
                     <p class="blackquote">
                         El 25% de los conflictos socioambientales vigentes está vinculado al agua y a la minería
                     </p>
                     <p>
-                        El jefe de la Oficina de Diálogo y Gobernabilidad de Arequipa, César Huamantuma, describe una actitud similar en su región: Este año, la Minera Buenaventura, propiedad de Roque Benavides, tuvo que firmar escrituras públicas ante la población cercana a su nuevo proyecto, Tambomayo, con el fin de asegurarles que no se dañarán los manantiales.
+                        El jefe de la Oficina de Diálogo y Gobernabilidad de Arequipa, César Huamantuma, describe una actitud similar en su región:
+                        Este año, la Minera Buenaventura, propiedad de Roque Benavides, tuvo que firmar escrituras públicas
+                        ante la población cercana a su nuevo proyecto, Tambomayo, con el fin de asegurarles que no se dañarán
+                        los manantiales.
                     </p>
                     <p>
-                        La proyección de los escenarios posibles para el Perú ante la falta de agua no es esperanzadora. El Senamhi realizó <a href="http://www.senamhi.gob.pe/main_down.php?ub=cmn&id=PROCLIM_01">un estudio</a> para calcular el impacto que tendrá el cambio climático hacia el año 2050 y concluyó que las fuentes de agua disponibles en once cuencas de la costa sur del país, que incluyen a Moquegua, Tacna, Ica, se reducirán entre 42% y 48%.
+                        La proyección de los escenarios posibles para el Perú ante la falta de agua no es esperanzadora. El Senamhi realizó
+                        <a href="http://www.senamhi.gob.pe/main_down.php?ub=cmn&id=PROCLIM_01">un estudio</a> para calcular el impacto que tendrá el cambio climático hacia el año 2050 y concluyó
+                        que las fuentes de agua disponibles en once cuencas de la costa sur del país, que incluyen a Moquegua,
+                        Tacna, Ica, se reducirán entre 42% y 48%.
                     </p>
                     <p>
                         La guerra por el agua será más intensa.
@@ -345,7 +435,13 @@
     </div>
     <footer>
         <div class="container">
-            Editora general: <span>Nelly Luna Amancio</span>. / Investigación y análisis de datos: <span>Elizabeth Salazar</span>. / Desarrollo y visualización: <span>Jason Martínez</span>, <span>Jorge Miranda</span>. / Video: <span>Gianfranco Huamán</span>. / Redes sociales: <span>Alonso Balbuena</span>.
+            Editora general:
+            <span>Nelly Luna Amancio</span>. / Investigación y análisis de datos:
+            <span>Elizabeth Salazar</span>. / Desarrollo y visualización:
+            <span>Jason Martínez</span>,
+            <span>Jorge Miranda</span>. / Video:
+            <span>Gianfranco Huamán</span>. / Redes sociales:
+            <span>Alonso Balbuena</span>.
         </div>
     </footer>
 
@@ -354,45 +450,87 @@
         <div class="post-body">
             <div class="post-content">
                 <div class="container">
-                    <h2>¿Cómo se hizo?</h2>
+                    <h2>¿Cómo conocer a los dueños del agua?</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        La guerra por el agua no es un escenario utópico para nuestro país: el Servicio Nacional de Meteorología e Hidrología (Senamhi)
+                        ha identificado 19 zonas altoandinas que sufren temporadas de sequías leves, moderadas y severas,
+                        y el gobierno se ha visto obligado más de una vez a declarar el déficit hídrico temporal en departamentos
+                        de la costa y sierra sur del país.
+                    </p>
+                    <p>Es en este contexto que en Ojo-Publico.com nos propusimos identificar quiénes son los dueños del agua
+                        en el Perú. Los primeros reportajes sirvieron para identificar los sectores económicos que explotan
+                        este recurso –principalmente la minería–, indagar en torno al volumen de agua que consumen y saber
+                        cuál es la retribución que pagan al Estado. El siguiente paso era saber de dónde extraen el ansiado
+                        recurso.
+                    </p>
+                    <p>El primer paso fue obtener el detalle de los derechos de uso de agua entregados por el Gobierno a las
+                        mineras. Para ello obtuvimos la data histórica alojada en el Sistema Nacional de Información de Recursos
+                        Hídricos, el buscador online de la Autoridad Nacional del Agua (ANA), el ente rector en esta materia.
+                    </p>
+                    <p>Sin embargo, mucha de esta data preliminar estaba incompleta o desactualizada, por lo que se tuvimos
+                        que ingresar manualmente a los documentos PDF de cada resolución –también alojados en la ANA– para
+                        identificar las fuentes de agua comprometida, las comunidades o distritos donde se ubican y el motivo
+                        de la licencia, autorización o permiso entregado.</p>
+                </div>
+                <div class="post-picture">
+                    <img src="dist/images/photos/ana.jpg" alt="">
+                    <p>RASTREO. El buscador de derechos de uso de agua de la ANA tiene data que no siempre coincide con
+                        los PDF archivados.</p>
+                </div>
+                <div class="container">
+                    <p> de los inconvenientes de la data archivada en la ANA es que las resoluciones administrativas, sobre todo
+                        las que fueron emitidas en las décadas del 70, 80 y 90 no incluyen las coordenadas geográficas de
+                        los puntos donde las empresas están autorizadas a extraer agua superficial o subterránea, y en algunos
+                        casos ni siquiera se menciona la jurisdicción involucrada.
+                    </p>
+                    <p>La información común que aparece en todos los derechos de uso de agua es el nombre de las cuencas donde
+                        se otorgó el permiso. Y estas cuencas son las que la ANA y el Senamhi clasifican en alta, media y
+                        baja de acuerdo a la reserva de agua que tienen disponible, datos que fueron codificados y usados
+                        para la investigación. Por ello, las cuencas fueron el hilo conductor de nuestra historia.
+                    </p>
+                    <p>Se crearon dos bases de datos en formato Excel, organizadas y depuradas en Open Refine. La primera tiene
+                        30.664 celdas de información que incluye el detalle de las licencias, autorizaciones y permisos para
+                        usar y extraer agua, emitidos durante los últimos 45 años y que están archivados en la ANA.
+                    </p>
+                    <p>La segunda contiene 1.376 celdas con el detalle de los conflictos socioambientales históricos y vigentes
+                        monitoreados por la Defensoría del Pueblo; así como la data de muertos y heridos en protestas contra
+                        la actividad minera que es recopilada por esta misma institución y por la Coordinadora Nacional de
+                        Derechos Humanos (CNDH).
+                    </p>
+                    <p>Las principales variables empleadas son la razón social de la empresa involucrada en el conflicto y el
+                        departamento donde se desarrolló, pues, a diferencia de la primera base de datos, está información
+                        no ha sido registrada por cuencas.
+                    </p>
+                </div>
+                <div class="post-picture">
+                    <img src="dist/images/photos/cuaderno.jpg" alt="">
+                    <p>
+                        PROTOTIPO. Las pruebas y diseño de visualización previo a la programación de los datos.
+                    </p>
+                </div>
+                <div class="container">
+                    <p>La forma de visualización elegida, con el programador del equipo, fue un cartograma, un mapa que muestra
+                        cantidades vinculadas a áreas específicas que permite modificar sus tamaños de acuerdo a la numeración
+                        asignada. Así, la concentración de licencias en determinadas cuencas permitió aplicar la distorsión
+                        de las superficies reales, utilizando como símbolos tres colores distintos para identificar los valores
+                        de agua disponible: amarillos, naranja y rojo.
+                    </p>
+                    <p>Se aplicaron dos capas geográficas: la primera por departamentos y la segunda por cuencas. Y por medio
+                        de un algoritmo se identificó las cuencas que cruzan determinados territorios y se anexo a tooltips
+                        en formato de fichas que contienen la información detallada de las bases de datos 1 y 2.
+                    </p>
+                    <p>El resultado es una aproximación de cómo se han distribuido las fuentes de agua dulce en el Perú a favor
+                        de la minería, si tenemos en cuenta que la data que recoge el Estado sobre el uso del agua está incompleta
+                        o desactualizada, pero permite tener una mirada sobre la concentración de una actividad de alta demanda
+                        de agua en zonas donde la escasez y mala calidad de este recurso ya es un problema local.
                     </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
@@ -400,48 +538,48 @@
     <script src="vendor/d3-cartogram.min.js"></script>
     <script src="vendor/textures.min.js"></script>
     <script src="vendor/typed.min.js"></script>
+    <script src="vendor/owl.carousel.min.js"></script>
     <!-- Load billboard.js with style -->
     <script src="vendor/billboard.min.js"></script>
     <link rel="stylesheet" href="vendor/billboard.min.css">
     <script src="dist/scripts/main.js"></script>
-    <script type="text/javascript" src="src/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript">
         var owl = $('.owl-carousel');
         owl.owlCarousel({
-            loop:true,
-            margin:10,
-            nav:false,
-                responsive:{
-                0:{
-                    items:1
+            loop: true,
+            margin: 10,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1
                 },
-                600:{
-                    items:2
+                600: {
+                    items: 2
                 },
-                900:{
-                    items:3
+                900: {
+                    items: 3
                 }
             }
         });
-        $('.car-next').click(function() {
+        $('.car-next').click(function () {
             owl.trigger('next.owl.carousel');
         })
-        $('.car-back').click(function() {
+        $('.car-back').click(function () {
             owl.trigger('prev.owl.carousel');
         });
-        $('.hwidone').click(function(){
+        $('#btn-hw').click(function () {
             $('.hwidone-cont').fadeIn();
-            $('body').css('overflow','hidden');
+            $('body').css('overflow', 'hidden');
         });
-        $('.close-hwid').click(function(){
+        $('.close-hwid').click(function () {
             $('.hwidone-cont').fadeOut();
-            $('body').css('overflow','auto');
+            $('body').css('overflow', 'auto');
         })
 
-        $('.leernota').click(function (event) {
+        $('#btn-post').click(function (event) {
             event.preventDefault();
             $('html, body').animate({
-                scrollTop: $($.attr(this, 'href')).offset().top - 50
+                scrollTop: $("#post").offset().top - 50
             }, 500);
         });
     </script>

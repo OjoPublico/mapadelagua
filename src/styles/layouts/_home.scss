@@ -81,7 +81,7 @@ body.modal-active {
         .landing-text {
             min-height: 140px;
         }
-        .btn-go {
+        .btn {
             border: solid 2px #fff;
             padding: 15px 50px;
             border-radius: 0;
@@ -92,7 +92,7 @@ body.modal-active {
             font-weight: 700;
             cursor: pointer;
             transition: all 0.5s ease 0s;
-            // opacity: 0;
+            margin-right: 20px;
 
             &:hover {
                 background-color: rgba(161, 168, 168, 0.5);
@@ -147,6 +147,7 @@ body.modal-active {
             font-weight: 700;
             // cursor: pointer;
             transition: all 0.75s ease 0s;
+            background-color: #242424;
 
             &.alta {
                 color: #ffeda0;
@@ -174,6 +175,11 @@ body.modal-active {
                     color: #111;
                     background-color: #ff4b4b;
                 }
+            }
+            &.none {
+                color: #fff;
+                background-color: #242424;
+                border-color: #242424;
             }
         }
         .label {
@@ -244,6 +250,27 @@ body.modal-active {
         z-index: 110;
         display: none;
         overflow-y: scroll;
+    }
+    #btn-hw {
+        border: solid 2px #fff;
+        padding: 15px 50px;
+        border-radius: 0;
+        background-color: transparent;
+        font-size: 17px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.5s ease 0s;
+        margin-top: 30px;
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        z-index: 100;
+
+        &:hover {
+            background-color: rgba(161, 168, 168, 0.5);
+        }
     }
     .cuenca-info {
         position: absolute;
@@ -547,6 +574,31 @@ body.modal-active {
             }
         }
     }
+    .zoom-controls {
+        border-radius: 3px;
+        overflow: hidden;
+        position: absolute;
+        top: 15px;
+        right: 5px;
+        .zoom-in {
+            border-bottom: solid 1px #242424;
+        }
+        .zoom-in,
+        .zoom-out {
+            padding: 4px;
+            width: 32px;
+            background-color: #fff;
+            opacity: 0.9;
+            cursor: pointer;
+            img {
+                width: 100%;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
     .tooltip {
         position: absolute;
         transform: translate(-50%, -100%);
@@ -570,6 +622,21 @@ body.modal-active {
             border-left: 7px solid transparent;
             border-right: 7px solid transparent;
             border-top: 7px solid rgb(255, 255, 255);
+        }
+
+        .nombre {
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-align: center;
+            font-size: 17px;
+        }
+        .nro {
+            text-align: center;
+            margin: 0 auto;
+
+            span {
+                margin-right: 10px;
+            }
         }
     }
 }
@@ -631,6 +698,17 @@ body.modal-active {
         line-height: 30px;
         p {
             margin-bottom: 30px;
+        }
+    }
+    &-picture {
+        width: 100%;
+        img {
+            width: 100%;
+        }
+        p {
+            font-size: 15px;
+            padding: 10px 20px;
+            text-align: center;
         }
     }
 }

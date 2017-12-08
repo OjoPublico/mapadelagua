@@ -100,6 +100,7 @@ footer span{
 	position: absolute;
 	right: 20px;
 	bottom: 20px;
+	z-index: 100;
 }
 
 .hwidone-cont{
@@ -224,18 +225,6 @@ small.small-p{
 		height: 100%;
 		width: auto;
 	}
-}
-
-.leernota{
-	border: 2px solid #fff;
-	font-size: 17px;
-	text-transform: uppercase;
-	color: #fff !important;
-	font-weight: 700;
-	text-decoration: none !important;
-	padding: 14px 30px;
-	padding-bottom: 15px;
-	margin-left: 10px;
 }
 
 @media (max-width: 640px){
