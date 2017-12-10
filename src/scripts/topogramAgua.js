@@ -41,7 +41,7 @@ let topogramAgua = function (options) {
     self.transform = d3.zoomIdentity;
 
     self.init = function () {
-        if($(window).width() < 768) {
+        if ($(window).width() < 768) {
             self.width = $(window).width();
         }
         self.projection = d3.geoMercator()
@@ -92,12 +92,30 @@ let topogramAgua = function (options) {
                 .call(self.zoom.scaleTo, self.zoom_value);
         });
 
-        self.svg.call(self.zoom);
+        
 
         if (self.width < 768) {
+            console.log(self.width);
             self.svg
                 .on("wheel", null)
-                .on("wheel.zoom", null);
+                .on("wheel.zoom", null)
+                .on("dblclick.zoom", null)
+                .on("mousedown", null)
+                .on("mousewheel", null)
+                .on("mousemove", null)
+                .on("mousedown.zoom", null)
+                .on("mousewheel.zoom", null)
+                .on("mousemove.zoom", null)
+                .on("DOMMouseScroll.zoom", null)
+                .on("dblclick.zoom", null)
+                .on("touchstart", null)
+                .on("touchmove", null)
+                .on("touchend", null)
+                .on("touchstart.zoom", null)
+                .on("touchmove.zoom", null)
+                .on("touchend.zoom", null)
+        } else {
+            self.svg.call(self.zoom);
         }
     };
 

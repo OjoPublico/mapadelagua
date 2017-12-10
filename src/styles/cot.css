@@ -119,6 +119,7 @@ footer span{
 	right: 20px;
 	top: 20px;
 	cursor: pointer;
+	z-index: 999;
 }
 
 .post-body p a{
