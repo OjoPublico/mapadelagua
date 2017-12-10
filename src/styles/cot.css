@@ -155,8 +155,13 @@ p.blackquote{
 .p-image img{
 	width: 100%;
 }
+.p-image p span,
+.post-picture p span {
+	font-weight: 700;
+}
 
-small.small-p{
+.small-p{
+	margin-top: 50px;
 	font-size: 15px;
 }
 
