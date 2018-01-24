@@ -1,0 +1,159 @@
+codigo,cuenca,priorizacion
+13718,Cuenca Acari,3
+49916,Cuenca Aguaytia,2
+49958,Cuenca Anapati,3
+13714,Cuenca Atico,3
+19,Cuenca Azángaro,3
+49846,Cuenca Biabo,2
+13936,Cuenca Bocapán,4
+156,Cuenca Callaccame,3
+134,Cuenca Camaná,3
+13754,Cuenca Cañete,3
+146,Cuenca Caño,3
+13156,Cuenca Caplina,2
+49872,Cuenca Carhuapanas,3
+13778,Cuenca Cascajal,1
+137596,Cuenca Casma,2
+4988,Cuenca Cenepa,2
+137156,Cuenca Chala,3
+137752,Cuenca Chaman,2
+49896,Cuenca Chamaya,4
+137558,Cuenca Chancay - Huaral,3
+13776,Cuenca Chancay-Lambayeque,3
+137154,Cuenca Chaparra,4
+13772,Cuenca Chicama,1
+1375532,Cuenca Chilca,4
+137556,Cuenca Chillón,3
+49892,Cuenca Chinchipe,4
+138,Cuenca Chira,4
+137152,Cuenca Choclón,4
+176,Cuenca Coata,1
+49898,Cuenca Crisnejas,2
+1375952,Cuenca Culebras,3
+49914,Cuenca Cushabatay,4
+49956,Cuenca Cutivireni,3
+13152,Cuenca De la Concordia,4
+46646,Cuenca De Las Piedras,3
+13932,Cuenca Fernandez,4
+137592,Cuenca Fortaleza,2
+1372,Cuenca Grande,2
+13178,Cuenca Honda,4
+13154,Cuenca Hospicio,3
+137712,Cuenca Huamansaña,2
+178,Cuenca Huancané,1
+137594,Cuenca Huarmey,2
+13756,Cuenca Huaura,3
+49848,Cuenca Huayabamba,2
+1374,Cuenca Ica,2
+16,Cuenca Ilave,1
+13172,Cuenca Ilo - Moquegua,3
+174,Cuenca Ilpa,3
+46648,Cuenca Inambari,1
+49798,Cuenca Itaya,4
+13774,Cuenca Jequetepeque,4
+1375992,Cuenca Lacramarca,3
+1314,Cuenca Lluta,4
+1316,Cuenca Locumba,3
+1375534,Cuenca Lurín,2
+137552,Cuenca Mala,2
+49792,Cuenca Maniti,4
+4996,Cuenca Mantaro,1
+144,Cuenca Mauri,3
+152,Cuenca Mauri Chico,3
+49844,Cuenca Mayo,2
+137716,Cuenca Moche,1
+49876,Cuenca Morona,3
+137772,Cuenca Motupe,2
+49794,Cuenca Nanay,4
+4978,Cuenca Napo,4
+137598,Cuenca Nepeña,2
+136,Cuenca Ocoña,2
+137774,Cuenca Olmos,2
+1375512,Cuenca Omas,3
+4662,Cuenca Orthón,4
+4992,Cuenca Pachitea,3
+4998,Cuenca Pampas,1
+49842,Cuenca Paranapura,2
+1392,Cuenca Pariñas,3
+4986,Cuenca Pastaza,3
+13758,Cuenca Pativilca,2
+49954,Cuenca Perene,1
+13712,Cuenca Pescadores - Caraveli,4
+13752,Cuenca Pisco,1
+1378,Cuenca Piura,2
+49874,Cuenca Potro,4
+49952,Cuenca Poyeni,4
+18,Cuenca Pucará,3
+4974,Cuenca Putumayo,2
+13934,Cuenca Quebrada Seca,4
+132,Cuenca Quilca - Vitor - Chili,1
+137554,Cuenca Rimac,1
+13158,Cuenca Sama,4
+137532,Cuenca San Juan,2
+1376,Cuenca Santa,1
+49878,Cuenca Santiago,2
+172,Cuenca Suches,3
+137572,Cuenca Supe,2
+49796,Cuenca Tahuayo,4
+49918,Cuenca Tamaya,3
+1318,Cuenca Tambo,2
+46644,Cuenca Tambopata,2
+49912,Cuenca Tapiche,2
+4964,Cuenca Tarau,4
+4982,Cuenca Tigre,4
+137534,Cuenca Topará,4
+1394,Cuenca Tumbes,4
+4994,Cuenca Urubamba,1
+148,Cuenca Ushusuma,2
+49894,Cuenca Utcubamba,3
+137714,Cuenca Virú,1
+13716,Cuenca Yauca,3
+4976,Cuenca Yavari,3
+137754,Cuenca Zaña,3
+13952,Cuenca Zarumilla,3
+49299,Intercuenca 49299,4
+4977,Intercuenca 4977,3
+49791,Intercuenca 49791,4
+49793,Intercuenca 49793,3
+49795,Intercuenca 49795,4
+49797,Intercuenca 49797,3
+49799,Intercuenca 49799,3
+49871,Intercuenca 49871,3
+49873,Intercuenca 49873,4
+49875,Intercuenca 49875,4
+49877,Intercuenca 49877,4
+49879,Intercuenca 49879,2
+49911,Intercuenca 49911,4
+49913,Intercuenca 49913,3
+49915,Intercuenca 49915,4
+49917,Intercuenca 49917,4
+49919,Intercuenca 49919,3
+49951,Intercuenca 49951,2
+49953,Intercuenca 49953,4
+49955,Intercuenca 49955,4
+49957,Intercuenca 49957,3
+49959,Intercuenca 49959,4
+49269,Intercuenca Alto Acre,4
+4999,Intercuenca Alto Apurímac,1
+49849,Intercuenca Alto Huallaga,1
+49289,Intercuenca Alto Iaco,4
+46649,Intercuenca Alto Madre de Dios,1
+49891,Intercuenca Alto Marañón I,2
+49893,Intercuenca Alto Marañón II,2
+49895,Intercuenca Alto Marañón III,4
+49897,Intercuenca Alto Marañón IV,1
+49899,Intercuenca Alto Marañón V,2
+4969,Intercuenca Alto Yurúa,3
+4997,Intercuenca Bajo Apurímac,3
+49841,Intercuenca Bajo Huallga,2
+4981,Intercuenca Bajo Marañón,4
+49845,Intercuenca Medio Huallaga,4
+49847,Intercuenca Medio Alto Huallaga,3
+46647,Intercuenca Medio Alto Madre de Dios,2
+49843,Intercuenca Medio Bajo Huallaga,4
+46643,Intercuenca Medio Bajo Madre de Dios,3
+4983,Intercuenca Medio Bajo Marañón,3
+4993,Intercuenca Medio Bajo Ucayali,3
+46645,Intercuenca Medio Madre de Dios,3
+4985,Intercuenca Medio Marañón,4
+179,Intercuenca Ramis,2

@@ -35,6 +35,13 @@ let topogramAgua = function (options) {
         'licencias': [],
     };
 
+    self.new_colors = {
+        "1" : "#ff5353",
+        "2" : "#fdae61",
+        "3" : "#ffeda0",
+        "4" : "#a6d96a"
+    };
+
     self.departamento_selected = 'todos';
     self.empresa_selected = 'todos';
 
@@ -92,10 +99,7 @@ let topogramAgua = function (options) {
                 .call(self.zoom.scaleTo, self.zoom_value);
         });
 
-        
-
-        if (self.width < 768) {
-            console.log(self.width);
+        if ($(window).width() < 800) {
             self.svg
                 .on("wheel", null)
                 .on("wheel.zoom", null)
@@ -113,7 +117,7 @@ let topogramAgua = function (options) {
                 .on("touchend", null)
                 .on("touchstart.zoom", null)
                 .on("touchmove.zoom", null)
-                .on("touchend.zoom", null)
+                .on("touchend.zoom", null);
         } else {
             self.svg.call(self.zoom);
         }
@@ -139,8 +143,8 @@ let topogramAgua = function (options) {
                             return 'path-' + d.id;
                         })
                         .attr("a", function (d) {
-                            if (self.data.cuencas[d.properties.CODIGO] !== undefined) {
-                                self.data.cuencas[d.properties.CODIGO].d = d;
+                            if (self.data.cuencas[parseInt(d.properties.CODIGO)] !== undefined) {
+                                self.data.cuencas[parseInt(d.properties.CODIGO)].d = d;
                             }
                         });
 
@@ -160,8 +164,11 @@ let topogramAgua = function (options) {
                                     .duration(750)
                                     .ease(d3.easeLinear)
                                     .attr("fill", function (d) {
-                                        if (self.data.cuencas[d.properties.CODIGO] !== undefined) {
-                                            return self.custom_color[self.data.cuencas[d.properties.CODIGO].DH];
+                                        // if (self.data.cuencas[parseInt(d.properties.CODIGO)] !== undefined) {
+                                        //     return self.custom_color[self.data.cuencas[parseInt(d.properties.CODIGO)].DH];
+                                        // }
+                                        if (self.priorizacion[parseInt(d.properties.CODIGO)] !== undefined) {
+                                            return self.new_colors[self.priorizacion[parseInt(d.properties.CODIGO)]];
                                         }
                                         return self.custom_color['default'];
                                     });
@@ -224,8 +231,8 @@ let topogramAgua = function (options) {
                 razon_social = licencia['RAZÓN SOCIAL'],
                 departamento = licencia.DEPARTAMENTO;
 
-            if (self.data.cuencas[id] === undefined) {
-                self.data.cuencas[id] = {
+            if (self.data.cuencas[parseInt(id)] === undefined) {
+                self.data.cuencas[parseInt(id)] = {
                     'id': id,
                     'nombre': licencia.CUENCA,
                     'tipo_uso': {
@@ -257,20 +264,20 @@ let topogramAgua = function (options) {
                 };
             }
 
-            self.data.cuencas[id].nro_licencias += 1;
-            self.data.cuencas[id].DH = licencia['DISPONIBILIDAD HÍDRICA'];
-            if ($.inArray(departamento, self.data.cuencas[id].departamentos) == -1) {
-                self.data.cuencas[id].departamentos.push(departamento);
+            self.data.cuencas[parseInt(id)].nro_licencias += 1;
+            self.data.cuencas[parseInt(id)].DH = licencia['DISPONIBILIDAD HÍDRICA'];
+            if ($.inArray(departamento, self.data.cuencas[parseInt(id)].departamentos) == -1) {
+                self.data.cuencas[parseInt(id)].departamentos.push(departamento);
             }
-            if ($.inArray(razon_social, self.data.cuencas[id].empresas) == -1) {
-                self.data.cuencas[id].empresas.push(razon_social);
+            if ($.inArray(razon_social, self.data.cuencas[parseInt(id)].empresas) == -1) {
+                self.data.cuencas[parseInt(id)].empresas.push(razon_social);
             }
             var clase = licencia['CLASE DE FUENTE'];
-            self.data.cuencas[id].clase[clase] += 1;
+            self.data.cuencas[parseInt(id)].clase[clase] += 1;
             var tipo_uso = licencia['TIPO DE USO'];
-            self.data.cuencas[id].tipo_uso[tipo_uso] += 1;
+            self.data.cuencas[parseInt(id)].tipo_uso[tipo_uso] += 1;
             var resolucion = licencia['TIPO DE PERMISO'];
-            self.data.cuencas[id].resolucion[resolucion] += 1;
+            self.data.cuencas[parseInt(id)].resolucion[resolucion] += 1;
 
             if (self.data.empresas[razon_social] === undefined) {
                 self.data.empresas[razon_social] = {
@@ -307,6 +314,15 @@ let topogramAgua = function (options) {
                 if (self.data.empresas[razon_social] !== undefined) {
                     self.data.empresas[razon_social].conflictos.push(d['CONFLICTOS SOCIALES VIGENTES']);
                 }
+            });
+        });
+
+        self.priorizacion = {};
+
+        d3.csv('data/priorizacion.csv', function(priorizacion) {
+            $.each(priorizacion, function(key, d) {
+                var cod = parseInt(d.codigo);
+                self.priorizacion[cod] = d.priorizacion;
             });
         });
     };
@@ -420,7 +436,7 @@ let topogramAgua = function (options) {
     self.showInfo = function (d) {
         let info = d3.select("#cuenca-info");
 
-        if (self.data.cuencas[d.properties.CODIGO] !== undefined) {
+        if (self.data.cuencas[parseInt(d.properties.CODIGO)] !== undefined || true) {
             $(".modal").show();
             $("html,body").scrollTop(0);
             $("body").addClass('modal-active');
@@ -429,7 +445,7 @@ let topogramAgua = function (options) {
 
             var tu = '';
             var total = 0;
-            $.each(self.data.cuencas[d.properties.CODIGO].tipo_uso, function (key, ee) {
+            $.each(self.data.cuencas[parseInt(d.properties.CODIGO)].tipo_uso, function (key, ee) {
                 if (ee > 0) {
                     tu += '<span>(' + ee + ')</span>' + key + '<br>';
                 }
@@ -443,7 +459,7 @@ let topogramAgua = function (options) {
                 'Licencia': 'Licencias',
                 'Permiso': 'Permisos',
             };
-            $.each(self.data.cuencas[d.properties.CODIGO].resolucion, function (key, ee) {
+            $.each(self.data.cuencas[parseInt(d.properties.CODIGO)].resolucion, function (key, ee) {
                 if (ee > 1) {
                     ta += '<span>(' + ee + ')</span>' + plur[key] + '<br>';
                 } else if (ee == 1) {
@@ -453,7 +469,7 @@ let topogramAgua = function (options) {
             info.select(".tipo-resolucion").html(ta);
 
             //
-            var cf = self.data.cuencas[d.properties.CODIGO].clase;
+            var cf = self.data.cuencas[parseInt(d.properties.CODIGO)].clase;
 
             var chart = bb.generate({
                 bindto: "#chart-fuente",
@@ -491,18 +507,18 @@ let topogramAgua = function (options) {
             });
 
             info.select(".total-resolucion").html('Total de resoluciones: ' + total);
-            info.select(".disponibilidad-hidrica").text(self.data.cuencas[d.properties.CODIGO].dh);
-            info.select(".ala").text(self.data.cuencas[d.properties.CODIGO].ala);
-            info.select(".aaa").text(self.data.cuencas[d.properties.CODIGO].aaa);
-            info.select(".departamento").text(self.data.cuencas[d.properties.CODIGO].departamentos.join(", "));
+            info.select(".disponibilidad-hidrica").text(self.data.cuencas[parseInt(d.properties.CODIGO)].dh);
+            info.select(".ala").text(self.data.cuencas[parseInt(d.properties.CODIGO)].ala);
+            info.select(".aaa").text(self.data.cuencas[parseInt(d.properties.CODIGO)].aaa);
+            info.select(".departamento").text(self.data.cuencas[parseInt(d.properties.CODIGO)].departamentos.join(", "));
 
 
             // Empresas
-            var total_empresas = self.data.cuencas[d.properties.CODIGO].empresas.length;
+            var total_empresas = self.data.cuencas[parseInt(d.properties.CODIGO)].empresas.length;
             var total_empresas_c = 0;
             var ff = true;
             $(".empresas-conflictos").html('');
-            $.each(self.data.cuencas[d.properties.CODIGO].empresas, function (i, d) {
+            $.each(self.data.cuencas[parseInt(d.properties.CODIGO)].empresas, function (i, d) {
                 var empresa = self.data.empresas[d];
                 if (empresa.afectados !== '' || empresa.conflictos.length > 0) {
                     total_empresas_c += 1;
@@ -528,7 +544,7 @@ let topogramAgua = function (options) {
             });
 
             if (total_empresas_c == 0) {
-                $.each(self.data.cuencas[d.properties.CODIGO].empresas, function (i, d) {
+                $.each(self.data.cuencas[parseInt(d.properties.CODIGO)].empresas, function (i, d) {
                     var el = $("<div></div>", { class: 'item' });
                     var name = $("<div></div>", { class: 'razon-social' }).html('<img src="dist/images/wagon.png" /> ' + d);
 
@@ -568,7 +584,7 @@ let topogramAgua = function (options) {
                 width: $("#cuenca-map").width(),
                 height: $("#cuenca-map").height(),
             });
-            cuenca_map.render(d, self.geodata_deps, self.projection, self.custom_color[self.data.cuencas[d.properties.CODIGO].DH]);
+            cuenca_map.render(d, self.geodata_deps, self.projection, self.custom_color[self.data.cuencas[parseInt(d.properties.CODIGO)].DH]);
         } else {
             console.log('Sin información :' + d.properties);
         }
@@ -582,7 +598,7 @@ let topogramAgua = function (options) {
 
 
     self.showTooltip = function (d, flag) {
-        if (self.data.cuencas[d.properties.CODIGO] == undefined) return;
+        // if (self.data.cuencas[parseInt(d.properties.CODIGO)] == undefined) return;
         let tooltip = d3.select("#map-tooltip");
         let cords, left, top;
         if (!flag) {
@@ -597,20 +613,24 @@ let topogramAgua = function (options) {
         }
 
         tooltip.select('.nombre').text(d.properties.NOMBRE);
-        var ta = '';
-        var plur = {
-            'Autorización': 'Autorizaciones',
-            'Licencia': 'Licencias',
-            'Permiso': 'Permisos',
-        };
-        $.each(self.data.cuencas[d.properties.CODIGO].resolucion, function (key, ee) {
-            if (ee > 1) {
-                ta += '<span>(' + ee + ')</span>' + plur[key] + '<br>';
-            } else if (ee == 1) {
-                ta += '<span>(' + ee + ')</span>' + key + '<br>';
-            }
-        });
-        tooltip.select('.nro').html(ta);
+        if (self.data.cuencas[parseInt(d.properties.CODIGO)] !== undefined) {
+            var ta = '';
+            var plur = {
+                'Autorización': 'Autorizaciones',
+                'Licencia': 'Licencias',
+                'Permiso': 'Permisos',
+            };
+            $.each(self.data.cuencas[parseInt(d.properties.CODIGO)].resolucion, function (key, ee) {
+                if (ee > 1) {
+                    ta += '<span>(' + ee + ')</span>' + plur[key] + '<br>';
+                } else if (ee == 1) {
+                    ta += '<span>(' + ee + ')</span>' + key + '<br>';
+                }
+            });
+            tooltip.select('.nro').html(ta);
+        } else {
+            tooltip.select('.nro').html('');
+        }
         tooltip
             .style('display', 'block')
             .style('left', left + 'px')
@@ -643,10 +663,10 @@ let topogramAgua = function (options) {
                 // if (key == 'area' || (self.filter_dh['Alta'] == false && self.filter_dh['Media'] == false && self.filter_dh['Baja'] == false)) {
                 return d.properties.Shape_Area;
             } else {
-                if (self.data.cuencas[d.properties.CODIGO] === undefined ||
-                    self.filter_dh[self.data.cuencas[d.properties.CODIGO].DH] === false)
+                if (self.data.cuencas[parseInt(d.properties.CODIGO)] === undefined ||
+                    self.filter_dh[self.data.cuencas[parseInt(d.properties.CODIGO)].DH] === false)
                     return 0;
-                return self.data.cuencas[d.properties.CODIGO].nro_licencias;
+                return self.data.cuencas[parseInt(d.properties.CODIGO)].nro_licencias;
             }
         },
             values = self.states.data()
