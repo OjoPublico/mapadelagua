@@ -80,7 +80,7 @@
                 se concentran en zonas de alto riesgo.
             </div>
             <div class="legend">
-                <div class="label">Nivel de priorización:</div>
+                <div class="label">Nivel de prioridad:</div>
                 <ul>
                     <li>
                         <span class="square"></span> Muy alta</li>
@@ -90,8 +90,11 @@
                         <span class="square"></span> Media</li>
                     <li>
                         <span class="square"></span> Baja</li>
+                </ul>
+                <div class="label">Otros:</div>
+                <ul>
                     <li>
-                        <span class="square"></span> Intercuenca</li>
+                        <span class="square" style="background-color: #242424;"></span> Intercuenca</li>
                 </ul>
             </div>
             <div class="switch">
@@ -161,46 +164,51 @@
                             <div class="value departamento"></div>
                         </div>
                     </div>
-                    <ul class="tabs">
-                        <li class="selected" id="tab1">
-                            <img src="dist/images/drop.png" /> Datos generales</li>
-                        <li id="tab2">
-                            <img src="dist/images/wagon.png" /> Empresas</li>
-                    </ul>
-                    <div class="blocks">
-                        <div class="block selected" id="block1">
-                            <div class="total-resolucion"></div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <div class="row">
-                                        <div class="stat stat-1">
-                                            <div class="label">Por tipo de resolución:</div>
-                                            <div class="value tipo-resolucion"></div>
+                    <div id="block-alter1">
+                        <ul class="tabs">
+                            <li class="selected" id="tab1">
+                                <img src="dist/images/drop.png" /> Datos generales</li>
+                            <li id="tab2">
+                                <img src="dist/images/wagon.png" /> Empresas</li>
+                        </ul>
+                        <div class="blocks">
+                            <div class="block selected" id="block1">
+                                <div class="total-resolucion"></div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="row">
+                                            <div class="stat stat-1">
+                                                <div class="label">Por tipo de resolución:</div>
+                                                <div class="value tipo-resolucion"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="stat stat-1">
+                                                <div class="label">Por tipo de uso:</div>
+                                                <div class="value tipo-uso"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="stat stat-1">
-                                            <div class="label">Por tipo de uso:</div>
-                                            <div class="value tipo-uso"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="row">
-                                        <div class="stat stat-1">
-                                            <div class="label">Por clase de fuente:</div>
-                                            <div id="chart-fuente"></div>
+                                    <div class="col-2">
+                                        <div class="row">
+                                            <div class="stat stat-1">
+                                                <div class="label">Por clase de fuente:</div>
+                                                <div id="chart-fuente"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="block" id="block2">
-                            <div class="empresas">
-                                <div class="total"></div>
-                                <div class="empresas-conflictos"></div>
+                            <div class="block" id="block2">
+                                <div class="empresas">
+                                    <div class="total"></div>
+                                    <div class="empresas-conflictos"></div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="block" id="block-alter2">
+                        No hay licenciasde agua registradas a favor del sector minero.
                     </div>
                 </div>
             </div>

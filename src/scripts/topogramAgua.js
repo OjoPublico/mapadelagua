@@ -444,10 +444,12 @@ let topogramAgua = function (options) {
     self.showInfo = function (d) {
         let info = d3.select("#cuenca-info");
 
-        if (self.data.cuencas[parseInt(d.properties.CODIGO)] !== undefined || true) {
+        if (self.data.cuencas[parseInt(d.properties.CODIGO)] !== undefined) {
             $(".modal").show();
             $("html,body").scrollTop(0);
             $("body").addClass('modal-active');
+            $("#block-alter1").show();
+            $("#block-alter2").hide();
 
             info.select(".nombre").text(d.properties.NOMBRE);
 
@@ -593,7 +595,24 @@ let topogramAgua = function (options) {
             });
             cuenca_map.render(d, self.geodata_deps, self.projection, self.new_colors[self.priorizacion[parseInt(d.properties.CODIGO)]]);
         } else {
-            console.log('Sin información :' + d.properties);
+            console.log('Sin información :', d.properties);
+            $(".modal").show();
+            $("html,body").scrollTop(0);
+            $("body").addClass('modal-active');
+            info.select(".nombre").text(d.properties.NOMBRE);
+            info.select('.disponibilidad-hidrica').text(self.map_priorizacion[self.priorizacion[parseInt(d.properties.CODIGO)]]);
+            info.select('.ala').text('');
+            info.select('.departamento').text('');
+
+            $("#block-alter2").show();
+            $("#block-alter1").hide();
+
+            let cuenca_map = new cuencaMap({
+                parent_id: 'cuenca-map',
+                width: $("#cuenca-map").width(),
+                height: $("#cuenca-map").height(),
+            });
+            cuenca_map.render(d, self.geodata_deps, self.projection, self.new_colors[self.priorizacion[parseInt(d.properties.CODIGO)]]);
         }
     };
 
