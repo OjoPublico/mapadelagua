@@ -42,6 +42,13 @@ let topogramAgua = function (options) {
         "4" : "#a6d96a"
     };
 
+    self.map_priorizacion = {
+        1: 'Muy Alta',
+        2: 'Alta',
+        3: 'Media',
+        4: 'Baja',
+    }
+
     self.departamento_selected = 'todos';
     self.empresa_selected = 'todos';
 
@@ -413,9 +420,10 @@ let topogramAgua = function (options) {
         }
 
         $.each(self.data.cuencas, function (key, cuenca) {
+            // console.log(cuenca);
             if ((self.departamento_selected == 'todos' || $.inArray(self.departamento_selected, cuenca.departamentos) !== -1) &&
                 (self.empresa_selected == 'todos' || $.inArray(self.empresa_selected, cuenca.empresas) !== -1)) {
-                $("#results").append($("<div></div>", { class: cuenca.dh.toLowerCase(), 'data-key': key }).text(cuenca.nombre));
+                $("#results").append($("<div></div>", { class: 'color-' + self.priorizacion[parseInt(cuenca.id)], 'data-key': key }).text(cuenca.nombre));
             }
         });
 
@@ -507,11 +515,10 @@ let topogramAgua = function (options) {
             });
 
             info.select(".total-resolucion").html('Total de resoluciones: ' + total);
-            info.select(".disponibilidad-hidrica").text(self.data.cuencas[parseInt(d.properties.CODIGO)].dh);
+            info.select(".disponibilidad-hidrica").text(self.map_priorizacion[self.priorizacion[parseInt(d.properties.CODIGO)]]);
             info.select(".ala").text(self.data.cuencas[parseInt(d.properties.CODIGO)].ala);
             info.select(".aaa").text(self.data.cuencas[parseInt(d.properties.CODIGO)].aaa);
             info.select(".departamento").text(self.data.cuencas[parseInt(d.properties.CODIGO)].departamentos.join(", "));
-
 
             // Empresas
             var total_empresas = self.data.cuencas[parseInt(d.properties.CODIGO)].empresas.length;
@@ -584,7 +591,7 @@ let topogramAgua = function (options) {
                 width: $("#cuenca-map").width(),
                 height: $("#cuenca-map").height(),
             });
-            cuenca_map.render(d, self.geodata_deps, self.projection, self.custom_color[self.data.cuencas[parseInt(d.properties.CODIGO)].DH]);
+            cuenca_map.render(d, self.geodata_deps, self.projection, self.new_colors[self.priorizacion[parseInt(d.properties.CODIGO)]]);
         } else {
             console.log('Sin información :' + d.properties);
         }

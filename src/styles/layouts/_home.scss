@@ -19,7 +19,6 @@ a {
     overflow: hidden;
     background-color: #111;
     @media screen and (max-width: 768px) {
-        // height: 1000px;
         min-height: 650px;
     }
     .landing-video {
@@ -143,60 +142,63 @@ a {
             font-family: 'Lato', Arial, Helvetica, sans-serif;
             font-size: 18px;
             line-height: 1.25;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         #status {
             margin-bottom: 30px;
-        }
-        .dh-check {
-            margin-bottom: 10px;
-            width: 100%;
-            padding: 3px;
-            border-radius: 4px;
-            border: solid 2px #fff;
-            text-align: center;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700; // cursor: pointer;
-            transition: all 0.75s ease 0s;
-            background-color: #242424;
-            &.alta {
-                color: #ffeda0;
-                border: solid 2px #ffeda0;
-                &.selected,
-                &:hover {
-                    color: #111;
-                    background-color: #ffeda0;
-                }
-            }
-            &.media {
-                color: #feb24c;
-                border: solid 2px #feb24c;
-                &.selected,
-                &:hover {
-                    color: #111;
-                    background-color: #feb24c;
-                }
-            }
-            &.baja {
-                color: #ff4b4b;
-                border: solid 2px #ff4b4b;
-                &.selected,
-                &:hover {
-                    color: #111;
-                    background-color: #ff4b4b;
-                }
-            }
-            &.none {
-                color: #fff;
-                background-color: #242424;
-                border-color: #242424;
-            }
         }
         .label {
             font-size: 15px;
             font-weight: 700;
             margin-bottom: 10px;
+        }
+        .legend {
+            margin-bottom: 15px;
+
+            ul {
+                width: 120px;
+                margin: 0 auto;
+                text-align: left;
+                li {
+                    line-height: 24px;
+                    margin-bottom: 2px;
+                    .square {
+                        display: block;
+                        float: left;
+                        margin-right: 5px;
+                        width: 24px;
+                        height: 24px;
+                        background-color: #ff5353;
+                        border: solid 1px #111;
+                    }
+
+                    &:nth-child(1) {
+                        .square {
+                            background-color: #ff5353;
+                        }
+                    }
+                    &:nth-child(2) {
+                        .square {
+                            background-color: #fdae61;
+                        }
+                    }
+                    &:nth-child(3) {
+                        .square {
+                            background-color: #ffeda0;
+                        }
+                    }
+                    &:nth-child(4) {
+                        .square {
+                            background-color: #a6d96a;
+                        }
+                    }
+                    &:nth-child(5) {
+                        .square {
+                            background-color: #242424;
+                        }
+                    }
+                }
+            }
         }
         .switch {
             &-box {
@@ -556,9 +558,7 @@ a {
         .chosen-container {
             width: 100%!important;
         }
-        .filter {
-            margin-bottom: 20px;
-        }
+
         #results-label {
             display: none;
         }
@@ -575,14 +575,17 @@ a {
                 box-shadow: 1px 1px 2px rgba(66, 66, 66, 0.5);
                 cursor: pointer;
                 transition: all 0.15s ease 0s;
-                &.alta {
+                &.color-1 {
+                    background-color: #ff5353;
+                }
+                &.color-2 {
+                    background-color: #fdae61;
+                }
+                &.color-3 {
                     background-color: #ffeda0;
                 }
-                &.media {
-                    background-color: #feb24c;
-                }
-                &.baja {
-                    background-color: #ff4b4b;
+                &.color-4 {
+                    background-color: #a6d96a;
                 }
                 &:hover {
                     opacity: 1;
