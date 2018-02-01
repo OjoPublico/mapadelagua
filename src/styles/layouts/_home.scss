@@ -126,7 +126,7 @@ a {
         width: $aside-width;
         height: 100%;
         z-index: 99;
-        padding: 20px 30px;
+        padding: 20px 20px;
         .title {
             font-family: 'Oswald', Arial, Helvetica, sans-serif;
             font-family: 'Encode Sans Condensed', sans-serif;
@@ -140,7 +140,7 @@ a {
             font-family: 'Lato', Arial, Helvetica, sans-serif;
             font-size: 19px;
             line-height: 1.25;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
         }
         #status {
@@ -152,7 +152,7 @@ a {
             margin-bottom: 10px;
         }
         .legend {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             ul {
                 width: 120px;
                 margin: 0 auto;
