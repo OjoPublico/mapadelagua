@@ -126,7 +126,7 @@ a {
         width: $aside-width;
         height: 100%;
         z-index: 99;
-        padding: 20px;
+        padding: 20px 30px;
         .title {
             font-family: 'Oswald', Arial, Helvetica, sans-serif;
             font-family: 'Encode Sans Condensed', sans-serif;
@@ -138,10 +138,10 @@ a {
         }
         .abstract {
             font-family: 'Lato', Arial, Helvetica, sans-serif;
-            font-size: 18px;
+            font-size: 19px;
             line-height: 1.25;
-            margin-bottom: 15px;
-            text-align: left;
+            margin-bottom: 30px;
+            text-align: center;
         }
         #status {
             margin-bottom: 30px;
@@ -152,7 +152,7 @@ a {
             margin-bottom: 10px;
         }
         .legend {
-            margin-bottom: 15px;
+            margin-bottom: 30px;
             ul {
                 width: 120px;
                 margin: 0 auto;
@@ -199,52 +199,39 @@ a {
             }
         }
         .switch {
-            &-box {
-                margin: 0 auto;
+            width: 220px;
+            margin: 0 auto;
+            .check {
                 display: flex;
-                width: 120px;
-                border: solid 1px #fff;
-                border-radius: 5px;
-                overflow: hidden;
-                padding: 2px;
-                position: relative;
-                font-size: 16px;
-                .item {
-                    text-align: center;
-                    width: 50%;
-                    padding: 3px 0;
-                    color: #fff;
-                    cursor: pointer;
-                    transition: all 0.25s ease 0s;
-                    &.item1 {
-                        color: #111;
-                    }
-                    &.item2 {
-                        color: #fff;
+                cursor: pointer;
+                &__square {
+                    width: 24px;
+                    height: 24px;
+                    display: block;
+                    margin-right: 6px;
+                    float: left;
+                    background-color: white;
+                    margin: 10px 20px 10px 0;
+                    img {
+                        width: 70%;
+                        height: 70%;
+                        margin: 15%;
+                        display: none;
                     }
                 }
-                .bg {
-                    position: absolute;
-                    width: calc(50% - 4px);
-                    top: 2px;
-                    left: 2px;
-                    bottom: 2px;
-                    background-color: #fff;
-                    border-radius: 3px;
-                    z-index: -1;
-                    transition: all 0.25s ease 0s;
+                &__label {
+                    float: left;
+                    width: 170px;
+                    text-align: left;
                 }
-                &.off {
-                    .item {
-                        &.item1 {
-                            color: #fff;
+                &.on {
+                    .check {
+                        &__square {
+                            background-color: steelblue;
+                            img {
+                                display: block;
+                            }
                         }
-                        &.item2 {
-                            color: #111;
-                        }
-                    }
-                    .bg {
-                        left: calc(50% + 2px);
                     }
                 }
             }
@@ -597,6 +584,8 @@ a {
     margin-left: $aside-width;
     width: calc(100% - #{$aside-width} - 300px);
     height: 100%;
+    border: solid 2px rgba(255, 255, 255, 0.15);
+    background-color: #272727;
     #map {
         width: 100%;
         height: 100%;
@@ -613,8 +602,8 @@ a {
         border-radius: 3px;
         overflow: hidden;
         position: absolute;
-        top: 15px;
-        right: 5px;
+        top: 5px;
+        left: 5px;
         .zoom-in {
             border-bottom: solid 1px #242424;
         }
@@ -768,7 +757,7 @@ a {
 
 .legend2 {
     font-family: 'Lato', Arial, Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.35;
     margin-bottom: 50px!important;
 }
@@ -799,7 +788,7 @@ a {
         margin-left: -5px;
         width: 0;
         border-top: 5px solid #fff;
-        border-top: 5px solid rgba(255,255,255,0.9);
+        border-top: 5px solid rgba(255, 255, 255, 0.9);
         border-right: 5px solid transparent;
         border-left: 5px solid transparent;
         content: " ";
@@ -808,7 +797,6 @@ a {
         display: none;
         pointer-events: none;
     }
-
     &:hover {
         &::after {
             display: block;
@@ -816,5 +804,37 @@ a {
         &::before {
             display: block;
         }
+    }
+}
+
+b {
+    font-weight: 700;
+}
+
+.btn-post {
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    border-radius: 0;
+    background-color: transparent;
+    font-size: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    -webkit-transition: all .5s ease 0s;
+    transition: all .5s ease 0s;
+    margin-top: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    z-index: 100;
+    width: 180px;
+    img {
+        margin-right: 20px
+    }
+
+    @media screen and (max-width: 768px) {
+        display: none;
     }
 }

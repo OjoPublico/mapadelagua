@@ -36,10 +36,10 @@ let topogramAgua = function (options) {
     };
 
     self.new_colors = {
-        "1" : "#ff5353",
-        "2" : "#fdae61",
-        "3" : "#ffeda0",
-        "4" : "#a6d96a"
+        "1": "#ff5353",
+        "2": "#fdae61",
+        "3": "#ffeda0",
+        "4": "#a6d96a"
     };
 
     self.map_priorizacion = {
@@ -182,11 +182,11 @@ let topogramAgua = function (options) {
 
                                 $(".dh-check").addClass("selected");
 
-                                setTimeout(function () {
-                                    $(".switch-box").toggleClass('off');
-                                    let key = $(this).hasClass('off') ? 'area' : 'resoluciones';
-                                    self.renderCuencas(key);
-                                }, 500);
+                                // setTimeout(function () {
+                                //     $(".switch-box").toggleClass('off');
+                                //     let key = $(this).hasClass('off') ? 'area' : 'resoluciones';
+                                //     self.renderCuencas(key);
+                                // }, 500);
                             }, 1500);
                         }, 1500);
                     });
@@ -228,6 +228,18 @@ let topogramAgua = function (options) {
             .on('click', function (d, i) {
                 self.showInfo(self.cuencas_feautres[i]);
             });
+
+
+        var f = false;
+
+        $("#check").click(function () {
+            if (f) return;
+            f = true;
+            $(this).toggleClass('on');
+            let key = $(this).hasClass('on') ? 'resoluciones' : 'area';
+            self.renderCuencas(key, f);
+            f = false;
+        });
     };
 
 
@@ -326,8 +338,8 @@ let topogramAgua = function (options) {
 
         self.priorizacion = {};
 
-        d3.csv('data/priorizacion.csv', function(priorizacion) {
-            $.each(priorizacion, function(key, d) {
+        d3.csv('data/priorizacion.csv', function (priorizacion) {
+            $.each(priorizacion, function (key, d) {
                 var cod = parseInt(d.codigo);
                 self.priorizacion[cod] = d.priorizacion;
             });
@@ -354,12 +366,6 @@ let topogramAgua = function (options) {
             $("#block1").hide();
             $(".tabs li").removeClass('selected');
             $(this).addClass('selected');
-        });
-
-        $(".switch-box").click(function () {
-            $(".switch-box").toggleClass('off');
-            let key = $(this).hasClass('off') ? 'area' : 'resoluciones';
-            self.renderCuencas(key);
         });
     };
 
